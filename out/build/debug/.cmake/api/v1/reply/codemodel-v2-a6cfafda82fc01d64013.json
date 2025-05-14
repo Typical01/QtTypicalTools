@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "TypicalTools",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-TypicalTools-Debug-bff9789b0398dc61eea6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "TypicalTools",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "TypicalTools",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "TypicalTools::@b64ae216819301aa7ecd",
+					"jsonFile" : "target-TypicalTools-Debug-d0f013f445949861fbc8.json",
+					"name" : "TypicalTools",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "TypicalTools_autogen::@b64ae216819301aa7ecd",
+					"jsonFile" : "target-TypicalTools_autogen-Debug-3b543f2bb11951a34b77.json",
+					"name" : "TypicalTools_autogen",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug",
+		"source" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

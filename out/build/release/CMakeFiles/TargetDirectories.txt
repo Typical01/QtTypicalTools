@@ -1,0 +1,10 @@
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/CMakeFiles/package.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/CMakeFiles/package_source.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/CMakeFiles/edit_cache.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/CMakeFiles/rebuild_cache.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/TypicalTools.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/package.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/package_source.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/edit_cache.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/rebuild_cache.dir
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/TypicalTools_autogen.dir

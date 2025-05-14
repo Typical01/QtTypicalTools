@@ -1,0 +1,13 @@
+# ninja log v5
+8	45	0	TypicalTools/CMakeFiles/TypicalTools_autogen	d5382020f1b258d9
+8	45	0	TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	d5382020f1b258d9
+8	45	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/CMakeFiles/TypicalTools_autogen	d5382020f1b258d9
+82	175	7688978711735104	TypicalTools/CMakeFiles/TypicalTools.dir/qrc_qml.cpp.obj	158e84df4344f886
+47	78	7688978710770112	TypicalTools/qrc_qml.cpp	be4ca90e45a93732
+8	45	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	d5382020f1b258d9
+47	78	7688978710770112	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/qrc_qml.cpp	be4ca90e45a93732
+246	966	7688953286692180	TypicalTools/CMakeFiles/TypicalTools.dir/TypicalTools_autogen/mocs_compilation.cpp.obj	d4b00080e7ea3386
+93	891	7688844953171514	TypicalTools/CMakeFiles/TypicalTools.dir/main.cpp.obj	574aff453bf8a913
+1391	1567	7688978725309269	TypicalTools/TypicalTools.exe	cb4378a68fccd623
+78	1391	7688978723864994	TypicalTools/CMakeFiles/TypicalTools.dir/src/main.cpp.obj	9d0249ed3ef358e4
+250	968	7688953286759826	TypicalTools/CMakeFiles/TypicalTools.dir/src/Settings.cpp.obj	ceb5f0fea2e4937

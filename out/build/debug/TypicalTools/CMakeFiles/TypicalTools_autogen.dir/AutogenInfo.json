@@ -1,0 +1,159 @@
+{
+	"BUILD_DIR" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/TypicalTools_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools",
+	"CMAKE_EXECUTABLE" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+	"CMAKE_LIST_FILES" : 
+	[
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/CMakeLists.txt",
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/qt.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5Config.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5Config.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5/Qt5ModuleLocation.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake",
+		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeParseArguments.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWindowsDirect2DIntegrationPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWindowsIntegrationPlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5Widgets_QWindowsVistaStylePlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake",
+		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CMakeParseArguments.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5OpenGL/Qt5OpenGLConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5OpenGL/Qt5OpenGLConfig.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Quick/Qt5QuickConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Quick/Qt5QuickConfig.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfig.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Network/Qt5NetworkConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Network/Qt5NetworkConfig.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Network/Qt5Network_QGenericEnginePlugin.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfigExtras.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QDebugMessageServiceFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QLocalClientConnectionFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QQmlDebugServerFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QQmlDebuggerServiceFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QQmlInspectorServiceFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QQmlNativeDebugConnectorFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QQmlNativeDebugServiceFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QQmlPreviewServiceFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QQmlProfilerServiceFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QQuickProfilerAdapterFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QTcpServerConnectionFactory.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5QuickControls2/Qt5QuickControls2ConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5QuickControls2/Qt5QuickControls2Config.cmake",
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/qml.qrc",
+		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/InstallRequiredSystemLibraries.cmake",
+		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CPack.cmake",
+		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CPackComponent.cmake",
+		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Templates/CPackConfig.cmake.in",
+		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Templates/CPackConfig.cmake.in"
+	],
+	"CMAKE_SOURCE_DIR" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools",
+	"DEP_FILE" : "",
+	"DEP_FILE_RULE_NAME" : "",
+	"HEADERS" : 
+	[
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Settings.h",
+			"MU",
+			"6YEA5652QU/moc_Settings.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/TypicalTools_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/TypicalTools_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NETWORK_LIB",
+		"QT_QML_LIB",
+		"QT_QUICK_LIB",
+		"QT_WIDGETS_LIB",
+		"WIN32"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtQuick",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtQml",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtNetwork",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtCore",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/mkspecs/win32-msvc",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtGui",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtANGLE",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtWidgets"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : [],
+	"MOC_PREDEFS_FILE" : "",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : 
+	[
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/qrc_qml.cpp"
+	],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 8,
+	"PARSE_CACHE_FILE" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/CMakeFiles/TypicalTools_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "C:/Typical/Qt/5.12.12/msvc2017_64/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "C:/Typical/Qt/5.12.12/msvc2017_64/bin/uic.exe",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 12,
+	"SETTINGS_FILE" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/CMakeFiles/TypicalTools_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/Settings.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/main.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : 
+	[
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/qrc_qml.cpp"
+	],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}
