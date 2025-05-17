@@ -377,30 +377,15 @@
 			"path" : "C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5QuickControls2/Qt5QuickControls2Config.cmake"
 		},
 		{
+			"isExternal" : true,
+			"path" : "C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfig.cmake"
+		},
+		{
 			"path" : "TypicalTools/qml.qrc"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/InstallRequiredSystemLibraries.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CPack.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CPackComponent.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Templates/CPackConfig.cmake.in"
-		},
-		{
-			"isExternal" : true,
-			"path" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Templates/CPackConfig.cmake.in"
 		}
 	],
 	"kind" : "cmakeFiles",

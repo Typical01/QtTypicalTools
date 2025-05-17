@@ -65,12 +65,9 @@
 		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5Qml_QTcpServerConnectionFactory.cmake",
 		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5QuickControls2/Qt5QuickControls2ConfigVersion.cmake",
 		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5QuickControls2/Qt5QuickControls2Config.cmake",
-		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/qml.qrc",
-		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/InstallRequiredSystemLibraries.cmake",
-		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CPack.cmake",
-		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Modules/CPackComponent.cmake",
-		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Templates/CPackConfig.cmake.in",
-		"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.28/Templates/CPackConfig.cmake.in"
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfigVersion.cmake",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfig.cmake",
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/qml.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools",
 	"DEP_FILE" : "",
@@ -78,9 +75,135 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/allocator.h",
+			"MU",
+			"HJIFYJIV5K/moc_allocator.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/assertions.h",
+			"MU",
+			"HJIFYJIV5K/moc_assertions.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/config.h",
+			"MU",
+			"HJIFYJIV5K/moc_config.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/forwards.h",
+			"MU",
+			"HJIFYJIV5K/moc_forwards.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/json.h",
+			"MU",
+			"HJIFYJIV5K/moc_json.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/json_features.h",
+			"MU",
+			"HJIFYJIV5K/moc_json_features.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/reader.h",
+			"MU",
+			"HJIFYJIV5K/moc_reader.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/value.h",
+			"MU",
+			"HJIFYJIV5K/moc_value.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/version.h",
+			"MU",
+			"HJIFYJIV5K/moc_version.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json/writer.h",
+			"MU",
+			"HJIFYJIV5K/moc_writer.cpp",
+			null
+		],
+		[
 			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Settings.h",
 			"MU",
 			"6YEA5652QU/moc_Settings.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool.h",
+			"MU",
+			"GL2QPRKKVO/moc_Tool.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/ConfigFileTextManage.h",
+			"MU",
+			"2EU53PWCYK/moc_ConfigFileTextManage.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/FileManage.h",
+			"MU",
+			"2EU53PWCYK/moc_FileManage.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/Json_Typical.h",
+			"MU",
+			"2EU53PWCYK/moc_Json_Typical.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/Languages.h",
+			"MU",
+			"2EU53PWCYK/moc_Languages.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/Log.h",
+			"MU",
+			"2EU53PWCYK/moc_Log.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/StringManage.h",
+			"MU",
+			"2EU53PWCYK/moc_StringManage.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/Tchar_Typical.h",
+			"MU",
+			"2EU53PWCYK/moc_Tchar_Typical.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/Time_Typical.h",
+			"MU",
+			"2EU53PWCYK/moc_Time_Typical.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/WindowHost.h",
+			"MU",
+			"2EU53PWCYK/moc_WindowHost.cpp",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/pch.h",
+			"MU",
+			"2EU53PWCYK/moc_pch.cpp",
 			null
 		]
 	],
@@ -92,10 +215,13 @@
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
 		"QT_NETWORK_LIB",
+		"QT_OPENGL_LIB",
 		"QT_QML_LIB",
+		"QT_QUICKCONTROLS2_LIB",
 		"QT_QUICK_LIB",
 		"QT_WIDGETS_LIB",
-		"WIN32"
+		"WIN32",
+		"_WINDOWS"
 	],
 	"MOC_DEPEND_FILTERS" : 
 	[
@@ -107,6 +233,8 @@
 	"MOC_INCLUDES" : 
 	[
 		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include",
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool",
+		"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/Json",
 		"C:/Typical/Qt/5.12.12/msvc2017_64/include",
 		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtQuick",
 		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtQml",
@@ -115,7 +243,9 @@
 		"C:/Typical/Qt/5.12.12/msvc2017_64/mkspecs/win32-msvc",
 		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtGui",
 		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtANGLE",
-		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtWidgets"
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtWidgets",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtOpenGL",
+		"C:/Typical/Qt/5.12.12/msvc2017_64/include/QtQuickControls2"
 	],
 	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
 	"MOC_OPTIONS" : [],

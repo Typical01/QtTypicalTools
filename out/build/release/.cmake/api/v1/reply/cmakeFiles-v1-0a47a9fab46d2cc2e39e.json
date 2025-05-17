@@ -377,6 +377,14 @@
 			"path" : "C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5QuickControls2/Qt5QuickControls2Config.cmake"
 		},
 		{
+			"isExternal" : true,
+			"path" : "C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Qml/Qt5QmlConfig.cmake"
+		},
+		{
 			"path" : "TypicalTools/qml.qrc"
 		}
 	],

@@ -3,7 +3,10 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.12  // 必须导入此模块
 import QtQuick.Layouts 1.12
 
+
+
 Window {
+    id: rootWindow
     visible: true
     width: 500
     height: 800
@@ -13,7 +16,7 @@ Window {
     // 可选：设置最小尺寸
     minimumWidth: 500
     minimumHeight: 800
-    title: "TypicalTools"
+    title: settings.applicationWindowTitleName
     flags: Qt.Dialog | Qt.WindowMinMaxButtonsHint | Qt.WindowSystemMenuHint | Qt.WindowTitleHint
 
     // Main
@@ -279,6 +282,12 @@ Window {
                     Layout.preferredHeight: 34
                     Layout.preferredWidth: 120
 
+                    onClicked: {
+                        settings.LoadBaseConfig(true)
+                        settings.LoadShellConfig()
+                        settings.LoadToolsMenu()
+                    }
+
                     background: Rectangle {
                                 color: "white"
                                 border.color: "black"
@@ -297,7 +306,8 @@ Window {
 
                     onClicked: {
                         // 关闭当前窗口
-                        close()
+                        rootWindow.close()
+                        settings.destroySettingWindow()
                     }
 
                     background: Rectangle {

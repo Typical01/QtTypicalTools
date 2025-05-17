@@ -228,6 +228,9 @@ CPACK_SOURCE_ZIP:BOOL=ON
 //Path to a file.
 MSVC_REDIST_DIR:PATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Redist/MSVC/14.38.33135
 
+//Path to a library.
+MY_LIB:FILEPATH=MY_LIB-NOTFOUND
+
 //The directory containing a CMake configuration file for QT.
 QT_DIR:PATH=C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5
 
@@ -269,6 +272,9 @@ Qt5Widgets_DIR:PATH=C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5Widgets
 
 //The directory containing a CMake configuration file for Qt5.
 Qt5_DIR:PATH=C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5
+
+//Path to a library.
+TYPICALTOOL:FILEPATH=TYPICALTOOL-NOTFOUND
 
 //Value Computed by CMake
 TypicalTools_BINARY_DIR:STATIC=C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools

@@ -1238,6 +1238,18 @@
 			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Redist/MSVC/14.38.33135"
 		},
 		{
+			"name" : "MY_LIB",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "MY_LIB-NOTFOUND"
+		},
+		{
 			"name" : "QT_DIR",
 			"properties" : 
 			[
@@ -1404,6 +1416,18 @@
 			],
 			"type" : "PATH",
 			"value" : "C:/Typical/Qt/5.12.12/msvc2017_64/lib/cmake/Qt5"
+		},
+		{
+			"name" : "TYPICALTOOL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "TYPICALTOOL-NOTFOUND"
 		},
 		{
 			"name" : "TypicalTools_BINARY_DIR",

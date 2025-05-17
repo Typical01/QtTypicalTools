@@ -10,7 +10,6 @@
 					[
 						1
 					],
-					"hasInstallRule" : true,
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
@@ -21,8 +20,7 @@
 				},
 				{
 					"build" : "TypicalTools",
-					"hasInstallRule" : true,
-					"jsonFile" : "directory-TypicalTools-Debug-bff9789b0398dc61eea6.json",
+					"jsonFile" : "directory-TypicalTools-Debug-43119e5195b85cfc9295.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -59,7 +57,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "TypicalTools::@b64ae216819301aa7ecd",
-					"jsonFile" : "target-TypicalTools-Debug-d0f013f445949861fbc8.json",
+					"jsonFile" : "target-TypicalTools-Debug-1aa5a01023edcc0f04d1.json",
 					"name" : "TypicalTools",
 					"projectIndex" : 0
 				},
