@@ -428,6 +428,9 @@ void QtTypicalTool::Settings::loadToolsMenu()
         });
 #endif
 
+    QObject::connect(helpSettingsAction, &QAction::triggered, Application, [this]() {
+        this->help();
+        });
     QObject::connect(quitAction, &QAction::triggered, Application, &QApplication::quit);
 
     //Win::RegisterHotKeyMessage RegisterHotKey_SetScreenResolution(TEXT("Ctrl + Alt + F9"), 

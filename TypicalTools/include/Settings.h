@@ -120,6 +120,10 @@ namespace QtTypicalTool {
             logDebug(Printf(TEXT("test: Printf!")).str().c_str());
         }
 
+        void help() {
+            QMessageBox::warning(nullptr, "TypicalTools", "帮助: 本程序由Qt框架制作.\nQt: https://download.qt.io/archive/qt/5.12/5.12.0/single/qt-everywhere-src-5.12.0.zip");
+        }
+
         void openSettingWindow(const QString& _ComponentName) {
             //offLoadEngine(_ComponentName);
             //onLoadEngine();
