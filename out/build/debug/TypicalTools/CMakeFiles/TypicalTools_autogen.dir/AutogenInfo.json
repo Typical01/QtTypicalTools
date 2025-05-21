@@ -141,6 +141,12 @@
 			null
 		],
 		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/ShellConfig.h",
+			"MU",
+			"6YEA5652QU/moc_ShellConfig.cpp",
+			null
+		],
+		[
 			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool.h",
 			"MU",
 			"GL2QPRKKVO/moc_Tool.cpp",
@@ -269,6 +275,11 @@
 	[
 		[
 			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/Settings.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/ShellConfig.cpp",
 			"MU",
 			null
 		],

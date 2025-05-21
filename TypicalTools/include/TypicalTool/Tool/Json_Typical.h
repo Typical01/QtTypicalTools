@@ -204,6 +204,7 @@ namespace Typical_Tool {
 		template<typename T = bool>
 		void ToStreamString(int32_t _lm = LogLnf)
 		{
+			LogDebug(LogWar, Printf(TEXT("JsonManage::ToStreamString: JsonData to string: ")));
 			LogDebug(stow(Json::writeString(this->WriterBuilder, this->Value)), _lm);
 		}
 	};

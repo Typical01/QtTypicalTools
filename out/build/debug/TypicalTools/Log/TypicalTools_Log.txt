@@ -1,60 +1,9 @@
-[2025-05-17 11:21:11][WARNING] Log::SetLogWriteLevel: 文件输出级别[All]
-[2025-05-17 11:21:11][INFO]    Log::SetLogFileWriteConfig: 日志输出文件名[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/Log\TypicalTools_Log.txt]
-[2025-05-17 11:21:11][INFO]    Log::CreateLogFileManageThread: [C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/Log\TypicalTools_Log.txt]打开文件成功!
-[2025-05-17 11:21:11][INFO]    Log::CreateLogFileManageThread: 日志写入线程 启动!
-[2025-05-17 11:21:11]          Settings::LoadBaseConfig: Load.
-[2025-05-17 11:21:11][INFO]    创建文件夹:[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config][目录] 存在!
-[2025-05-17 11:21:11][WARNING] Settings::LoadBaseConfig: 文件夹[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config]已存在!
-[2025-05-17 11:21:11][WARNING] Settings::LoadBaseConfig: 开始创建Json文件[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config\Config.ini]!
-[2025-05-17 11:21:11]          Settings::LoadBaseConfig: 配置文件初始化[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config\Config.ini]
-[2025-05-17 11:21:11][INFO]    Settings::LoadBaseConfig: 读取文件[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config\Config.ini]成功!
-[2025-05-17 11:21:11][INFO]    Settings::UpdateConfig: ReLoad.
-[2025-05-17 11:21:11][INFO]    ShellConfigInit() ReLoad
-[2025-05-17 11:21:11]          ShellConfig: [ping-baidu]
-[2025-05-17 11:21:11]            操作模式: [打开文件]
-[2025-05-17 11:21:11]            文件: cmd
-[2025-05-17 11:21:11]            参数: /k ping -t www.baidu.com
-[2025-05-17 11:21:11]            显示窗口: [是]
-[2025-05-17 11:21:11]            菜单按键: [是]
-[2025-05-17 11:21:11]          OtherConfig: [基本设置]
-[2025-05-17 11:21:11]          ShellConfig: [笔记本键盘关]
-[2025-05-17 11:21:11]            操作模式: [管理员运行]
-[2025-05-17 11:21:11]            文件: cmd
-[2025-05-17 11:21:11]            参数: /k sc config i8042prt start= disabled
-[2025-05-17 11:21:11]            显示窗口: [是]
-[2025-05-17 11:21:11]            菜单按键: [是]
-[2025-05-17 11:21:11]          ShellConfig: [笔记本键盘开]
-[2025-05-17 11:21:11]            操作模式: [管理员运行]
-[2025-05-17 11:21:11]            文件: cmd
-[2025-05-17 11:21:11]            参数: /k sc config i8042prt start= auto
-[2025-05-17 11:21:11]            显示窗口: [是]
-[2025-05-17 11:21:11]            菜单按键: [是]
-[2025-05-17 11:21:11][INFO]    LoadToolsMenu() ReLoad
-[2025-05-17 11:21:11]          Typical_Tool::WindowsSystem::WindowShell::ShellOperate
-[2025-05-17 11:21:11]          操作名: [ping-baidu]
-[2025-05-17 11:21:11]            注册: 程序菜单项
-[2025-05-17 11:21:11][INFO]    ShellConfig::OutConfig()
-[2025-05-17 11:21:11]          菜单按钮: 是
-[2025-05-17 11:21:11]          Shell操作: 打开文件
-[2025-05-17 11:21:11]          文件: cmd
-[2025-05-17 11:21:11]          参数: /k ping -t www.baidu.com
-[2025-05-17 11:21:11]          显示窗口: 是
-[2025-05-17 11:21:11]          操作名: [笔记本键盘关]
-[2025-05-17 11:21:11]            注册: 程序菜单项
-[2025-05-17 11:21:11][INFO]    ShellConfig::OutConfig()
-[2025-05-17 11:21:11]          菜单按钮: 是
-[2025-05-17 11:21:11]          Shell操作: 管理员运行
-[2025-05-17 11:21:11]          文件: cmd
-[2025-05-17 11:21:11]          参数: /k sc config i8042prt start= disabled
-[2025-05-17 11:21:11]          显示窗口: 是
-[2025-05-17 11:21:11]          操作名: [笔记本键盘开]
-[2025-05-17 11:21:11]            注册: 程序菜单项
-[2025-05-17 11:21:11][INFO]    ShellConfig::OutConfig()
-[2025-05-17 11:21:11]          菜单按钮: 是
-[2025-05-17 11:21:11]          Shell操作: 管理员运行
-[2025-05-17 11:21:11]          文件: cmd
-[2025-05-17 11:21:11]          参数: /k sc config i8042prt start= auto
-[2025-05-17 11:21:11]          显示窗口: 是
-[2025-05-17 11:21:11][WARNING] ExeRunItemShell: 没有执行项!
-[2025-05-17 11:21:15][ERROR]   offLoadEngine: 释放Qml引擎资源!
-[2025-05-17 11:21:17][ERROR]   test: Printf!
+[2025-05-21 14:27:48][WARNING] Log::SetLogWriteLevel: 文件输出级别[All]
+[2025-05-21 14:27:48][INFO]    Log::SetLogFileWriteConfig: 日志输出文件名[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/Log\TypicalTools_Log.txt]
+[2025-05-21 14:27:48][INFO]    Log::CreateLogFileManageThread: [C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/Log\TypicalTools_Log.txt]打开文件成功!
+[2025-05-21 14:27:48][INFO]    Log::CreateLogFileManageThread: 日志写入线程 启动!
+[2025-05-21 14:27:48][INFO]    创建文件夹:[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config][目录] 存在!
+[2025-05-21 14:27:48][ERROR]   JsonManage::ReadStream: 解析 Json失败: [* Line 1, Column 1
+  Syntax error: value, object or array expected.
+]
+[2025-05-21 14:27:48][ERROR]   JsonManage::ReadStream: Json文件路径: [C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config\Config.ini]

@@ -141,6 +141,12 @@
 			null
 		],
 		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/ShellConfig.h",
+			"MU",
+			"6YEA5652QU/moc_ShellConfig.cpp",
+			null
+		],
+		[
 			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool.h",
 			"MU",
 			"GL2QPRKKVO/moc_Tool.cpp",
@@ -221,7 +227,8 @@
 		"QT_QUICKCONTROLS2_LIB",
 		"QT_QUICK_LIB",
 		"QT_WIDGETS_LIB",
-		"WIN32"
+		"WIN32",
+		"_WINDOWS"
 	],
 	"MOC_DEPEND_FILTERS" : 
 	[
@@ -269,6 +276,11 @@
 	[
 		[
 			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/Settings.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/ShellConfig.cpp",
 			"MU",
 			null
 		],

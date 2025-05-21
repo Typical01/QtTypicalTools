@@ -69,15 +69,15 @@ int main(int argc, char* argv[])
 
 
     QtTypicalTool::Settings* SettingsInstance = new QtTypicalTool::Settings();
-    SettingsInstance->Initialize(app, QCoreApplication::applicationName().toStdString(), 
-        QCoreApplication::applicationDirPath().toStdString()); //保存当前程序目录
+    SettingsInstance->Initialize(app, QCoreApplication::applicationName(), 
+        QCoreApplication::applicationDirPath()); //保存当前程序目录
 
 
     // 创建系统托盘图标
     QSystemTrayIcon* trayIcon = new QSystemTrayIcon();
     SettingsInstance->SystemTrayIcon = trayIcon;
     trayIcon->setIcon(Icon);
-    trayIcon->setToolTip(QString(SettingsInstance->applicationWindowTitleName.c_str()));
+    trayIcon->setToolTip(QString(SettingsInstance->applicationWindowTitleName));
 
     // 创建托盘菜单
     QMenu* trayMenu = new QMenu();
@@ -105,10 +105,10 @@ int main(int argc, char* argv[])
         margin: 5px 0;
     }
 )");
-    SettingsInstance->LoadBaseConfig(false);
-    SettingsInstance->LoadShellConfig();
+    SettingsInstance->loadBaseConfig(false);
+    SettingsInstance->loadShellConfig();
 
-    SettingsInstance->LoadToolsMenu();
+    SettingsInstance->loadToolsMenu();
     SettingsInstance->ExeRunItemShell();
 
     return app->exec();

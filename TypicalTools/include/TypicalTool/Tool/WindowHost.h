@@ -267,8 +267,10 @@ namespace Typical_Tool {
 			Tstr WindowShow; //窗口显示
 			Tstr MenuButton; //菜单按键
 
+			ShellConfig() {}
+
 			ShellConfig(Tstr _OperateName, Tstr _ShellOperate, Tstr _File,
-				Tstr _Arg, Tstr _WindowShow = TEXT("是"), Tstr _MenuButton = TEXT("否"))
+				Tstr _Arg, Tstr _WindowShow = TEXT("true"), Tstr _MenuButton = TEXT("false"))
 			{
 				OperateName = _OperateName;
 				ShellOperate = _ShellOperate;
@@ -373,7 +375,7 @@ namespace Typical_Tool {
 					Tstr MenuButton = tempShell->MenuButton;
 
 					//区分: 程序启动项/程序菜单项
-					if (MenuButton == TEXT("否")) {
+					if (MenuButton == TEXT("false")) {
 						ExeRunItem.push_back(*tempShell);
 						LogDebug(Printf(TEXT("操作名: [%s]"), OperateName));
 						LogDebug(TEXT("  注册: 程序启动项"));
@@ -444,7 +446,7 @@ namespace Typical_Tool {
 			* Shell消息 temp("nvidia-smi", (int32_t)ShellExecute(NULL, "runas", "cmd", "nvidia-smi -LogDebug 1080", NULL, SW_SHOWNORMAL));
 			*/
 			template<class T = bool>
-			static ShellMessage ExecuteAnalyze(Tstr OperateName, Tstr ShellOperate, Tstr ShellFile, Tstr ShellArg = TEXT(""), Tstr WindowShow = TEXT("是")) {
+			static ShellMessage ExecuteAnalyze(Tstr OperateName, Tstr ShellOperate, Tstr ShellFile, Tstr ShellArg = TEXT(""), Tstr WindowShow = TEXT("true")) {
 				if (ShellOperate == TEXT("打开文件") || ShellOperate == TEXT("open")) {
 					ShellOperate = TEXT("open");
 					LogDebug(LogTip, TEXT("ExecuteAnalyze: Shell操作模式(打开文件)"));
@@ -464,7 +466,7 @@ namespace Typical_Tool {
 				}
 
 				int32_t ShowWindow = 0;
-				if (WindowShow == TEXT("是")) {
+				if (WindowShow == TEXT("true")) {
 					ShowWindow = 5;
 				}
 				LogDebug(LogWar, Printf(TEXT("ExecuteAnalyze: 窗口显示 [%s]"), WindowShow));

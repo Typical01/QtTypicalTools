@@ -16,6 +16,7 @@ C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/inc
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool.h
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/main.cpp
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/ConfigFileTextManage.h
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/ShellConfig.cpp
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/FileManage.h
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/Json_Typical.h
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/Languages.h
@@ -24,3 +25,5 @@ C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/inc
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/Time_Typical.h
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/TypicalTool/Tool/pch.h
 C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/src/Settings.cpp
+C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/TypicalTools/include/ShellConfig.h
+ mmc:Q_OBJECT

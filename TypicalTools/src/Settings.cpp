@@ -4,20 +4,15 @@
 QtTypicalTool::Settings::Settings(QObject *parent)
 	: QObject(parent), Application(nullptr), SystemTrayIcon(nullptr), Menu(nullptr), QmlApplicationEngine(nullptr)
 {
-    // 使用 QQmlApplicationEngine 加载 QML 文件
-    QmlApplicationEngine = new QQmlApplicationEngine();
-    if (QmlApplicationEngine->rootContext() != nullptr) {
-        QmlApplicationEngine->rootContext()->setContextProperty("settings", this);
-    }
-
+    bEnginValid = onLoadEngine();
 }
 
 QtTypicalTool::Settings::~Settings()
 {
-    LogDebug(LogErr, Printf(TEXT("Settings: 程序结束!")));
+    qDebug() << Printf(TEXT("Settings: 程序结束!")).str().c_str();
 }
 
-void QtTypicalTool::Settings::Initialize(QApplication* _Application, const Tstr& _applicationName, const Tstr& _applicationDirPath)
+void QtTypicalTool::Settings::Initialize(QApplication* _Application, const QString& _applicationName, const QString& _applicationDirPath)
 {
     Application = _Application;
     applicationName = _applicationName;
@@ -30,7 +25,57 @@ void QtTypicalTool::Settings::Initialize(QApplication* _Application, const Tstr&
 #endif
     Log::SetLogFileWrite(true);
     Log::SetLogWriteLevel(LogTip);
-    LogDebug.SetLogFileWriteConfig(TEXT("TypicalTools"), Printf(TEXT("%s/Log"), applicationDirPath));
+    LogDebug.SetLogFileWriteConfig(TEXT("TypicalTools"), Printf(TEXT("%s/Log"), applicationDirPath.toStdString()).str().c_str());
+
+    qInstallMessageHandler(Settings::customMessageHandler); 
+    qRegisterMetaType<ShellConfig*>("ShellConfig*");
+    qmlRegisterType<ShellConfig>("com.example.shell", 1, 0, "ShellConfig");
+    qmlRegisterType<Settings>("com.example.settings", 1, 0, "Settings");
+
+    qDebug() << TEXT("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n程序开始!\n");
+}
+
+void QtTypicalTool::Settings::customMessageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg)
+{
+    static QFile file("./Log/log.txt");
+    if (!file.isOpen()) {
+        file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text);
+    }
+
+    QTextStream out(&file);
+    QString timeStamp = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString logLevel;
+
+    switch (type) {
+    case QtDebugMsg:
+        logLevel = "DEBUG";
+        break;
+    case QtInfoMsg:
+        logLevel = "INFO";
+        break;
+    case QtWarningMsg:
+        logLevel = "WARNING";
+        break;
+    case QtCriticalMsg:
+        logLevel = "CRITICAL";
+        break;
+    case QtFatalMsg:
+        logLevel = "FATAL";
+        break;
+    }
+
+    out << QString("[%1] %2: %3 (%4:%5, %6)\n")
+        .arg(timeStamp)
+        .arg(logLevel)
+        .arg(msg)
+        .arg(context.file)
+        .arg(context.line)
+        .arg(context.function);
+    out.flush();
+
+    if (type == QtFatalMsg) {
+        abort();
+    }
 }
 
 int32_t QtTypicalTool::Settings::GetIntId()
@@ -38,150 +83,160 @@ int32_t QtTypicalTool::Settings::GetIntId()
     return IntId++;
 }
 
-void QtTypicalTool::Settings::ShellOperate(QMenu* _Menu, std::vector<tytl::Win::ShellConfig>& _ShellConfig) {
-    LogDebug(TEXT("Typical_Tool::WindowsSystem::WindowShell::ShellOperate"));
+void QtTypicalTool::Settings::ShellOperate(QMenu* _Menu, QVariantList& _ShellConfig) {
+    qDebug(TEXT("Typical_Tool::WindowsSystem::WindowShell::ShellOperate"));
 
-    for (auto tempShell = _ShellConfig.begin(); tempShell != _ShellConfig.end(); tempShell++) {
-        //判断类型
-        Tstr OperateName = tempShell->OperateName;
-        Tstr MenuButton = tempShell->MenuButton;
+    for (auto tempShell = _ShellConfig.begin(); tempShell != _ShellConfig.end(); ++tempShell) {
+        // 判断类型
+        ShellConfig* config = qvariant_cast<ShellConfig*>(*tempShell);
+        if (!config) {
+            qWarning() << "Failed to cast QVariant to ShellConfig*";
+            continue;
+        }
 
-        //区分: 程序启动项/程序菜单项
-        if (MenuButton == TEXT("否")) {
-            ExeRunItem.push_back(*tempShell);
-            LogDebug(Printf(TEXT("操作名: [%s]"), OperateName));
-            LogDebug(TEXT("  注册: 程序启动项"));
-            tempShell->OutConfig(); //输出配置
+        QString operateName = config->getOperateName();
+        bool menuButton = config->getMenuButton();
+
+        // 区分: 程序启动项/程序菜单项
+        if (menuButton == false) {
+            ExeRunItem.push_back(config);
+            qDebug() << "操作名: [" << operateName << "]";
+            qDebug() << "  注册: 程序启动项";
+            config->output(); // 输出配置
         }
         else {
-            ExeMenuItem.insert({ GetIntId(), *tempShell});
-            LogDebug(Printf(TEXT("操作名: [%s]"), OperateName));
-            LogDebug(TEXT("  注册: 程序菜单项"));
-            //添加菜单项
-            QAction* MenuItemAction = new QAction(OperateName.c_str());
-            Menu->addAction(MenuItemAction);
-            tempShell->OutConfig(); //输出配置
+            int ID = GetIntId();
+            ExeMenuItem.insert({ ID, config });
+            qDebug() << "操作名: [" << operateName << "]";
+            qDebug() << "  注册: 程序菜单项";
+            // 添加菜单项
+            QAction* MenuItemAction = new QAction(operateName);
+            _Menu->addAction(MenuItemAction);
+            connect(MenuItemAction, &QAction::triggered, [this, ID]() {
+                qDebug() << "Settings::ShellOperate: 选项[" << ID << "]被触发.";
+                ExeMenuItemShell(ID);
+                });
+            config->output(); // 输出配置
         }
     }
 }
 
 void QtTypicalTool::Settings::ExeRunItemShell() {
+    qDebug() << TEXT("Settings::ExeRunItemShell.");
     //遍历执行所有: 程序启动项
     if (ExeRunItem.size() > 0) {
         for (auto tempShell = ExeRunItem.begin(); tempShell != ExeRunItem.end(); tempShell++) {
-            auto OperateName = tempShell->OperateName;
-            auto ShellOperate = tempShell->ShellOperate;
-            auto File = tempShell->File;
-            auto Arg = tempShell->Arg;
-            auto WindowShow = tempShell->WindowShow;
+            auto OperateName = tempShell->getOperateName();
+            auto ShellOperate = tempShell->getShellOperate();
+            auto File = tempShell->getFile();
+            auto Arg = tempShell->getArg();
+            auto WindowShow = tempShell->getWindowShow();
 
             ExecuteAnalyze(OperateName, ShellOperate, File, Arg, WindowShow);
         }
     }
     else {
-        LogDebug(LogWar, TEXT("ExeRunItemShell: 没有执行项!"));
+        qDebug() << TEXT("ExeRunItemShell: 没有执行项!");
     }
 }
 
 void QtTypicalTool::Settings::ExeMenuItemShell(int32_t _MenuItemID) {
+    qDebug() << TEXT("Settings::ExeMenuItemShell.");
     //查找并执行对应菜单ID的 Shell配置
     auto tempIndex = ExeMenuItem.find(_MenuItemID);
     if (tempIndex != ExeMenuItem.end()) {
-        tytl::Win::ShellConfig tempShellConfig = tempIndex->second;
+        ShellConfig* tempShellConfig = tempIndex->second;
 
-        Tstr OperateName = tempShellConfig.OperateName;
-        Tstr ShellOperate = tempShellConfig.ShellOperate;
-        Tstr File = tempShellConfig.File;
-        Tstr Arg = tempShellConfig.Arg;
-        Tstr WindowShow = tempShellConfig.WindowShow;
+        QString OperateName = tempShellConfig->getOperateName();
+        QString ShellOperate = tempShellConfig->getShellOperate();
+        QString File = tempShellConfig->getFile();
+        QString Arg = tempShellConfig->getArg();
+        bool WindowShow = tempShellConfig->getWindowShow();
 
         ExecuteAnalyze(OperateName, ShellOperate, File, Arg, WindowShow);
     }
     else {
-        LogDebug(LogErr, Printf(TEXT("ExeMenuItemShell: 没有找到菜单选项 [%s]!"), _MenuItemID));
+        qDebug() << Printf(TEXT("ExeMenuItemShell: 没有找到菜单选项 [%s]!"), _MenuItemID).str().c_str();
     }
 }
 
-tytl::Win::ShellMessage QtTypicalTool::Settings::ExecuteAnalyze(Tstr OperateName, Tstr ShellOperate, Tstr ShellFile, Tstr ShellArg, Tstr WindowShow) {
+void QtTypicalTool::Settings::ExecuteAnalyze(QString OperateName, QString ShellOperate, QString ShellFile, QString ShellArg, bool WindowShow) {
+    qDebug(TEXT("Typical_Tool::WindowsSystem::WindowShell::ExecuteAnalyze"));
     if (ShellOperate == TEXT("打开文件") || ShellOperate == TEXT("open")) {
         ShellOperate = TEXT("open");
-        LogDebug(LogTip, TEXT("ExecuteAnalyze: Shell操作模式(打开文件)"));
+        qDebug() <<TEXT("ExecuteAnalyze: Shell操作模式(打开文件)");
     }
     else if (ShellOperate == TEXT("管理员运行") || ShellOperate == TEXT("runas")) {
         ShellOperate = TEXT("runas");
-        LogDebug(LogTip, TEXT("ExecuteAnalyze: Shell操作模式(管理员运行)"));
+        qDebug() <<TEXT("ExecuteAnalyze: Shell操作模式(管理员运行)");
     }
     else if (ShellOperate == TEXT("打开文件夹") || ShellOperate == TEXT("explore")) {
         ShellOperate = TEXT("explore");
-        LogDebug(LogTip, TEXT("ExecuteAnalyze: Shell操作模式(打开文件夹)"));
+        qDebug() <<TEXT("ExecuteAnalyze: Shell操作模式(打开文件夹)");
     }
     else {
-        LogDebug(LogWar, TEXT("ExecuteAnalyze: Shell操作模式错误(打开文件/打开文件夹/管理员运行)"));
-        LogDebug(LogWar, Printf(TEXT("ExecuteAnalyze: 操作名: [%s]"), OperateName));
-        return tytl::Win::ShellMessage();
+        qDebug() << TEXT("ExecuteAnalyze: Shell操作模式错误(打开文件/打开文件夹/管理员运行)");
+        qDebug() << Printf(TEXT("ExecuteAnalyze: 操作名: [%s]"), OperateName.toStdString()).str().c_str();
+        return;
     }
 
     int32_t ShowWindow = 0;
-    if (WindowShow == TEXT("是")) {
+    if (WindowShow) {
         ShowWindow = 5;
     }
-    LogDebug(LogWar, Printf(TEXT("ExecuteAnalyze: 窗口显示 [%s]"), WindowShow));
-
-    tytl::Win::ShellMessage temp(OperateName, (int32_t)ShellExecute(NULL, ShellOperate.c_str(), ShellFile.c_str(), ShellArg.c_str(), NULL, ShowWindow));
-    return temp;
+    qDebug() << Printf(TEXT("ExecuteAnalyze: 窗口显示 [%s]"), WindowShow).str().c_str();
 }
 
-void QtTypicalTool::Settings::LoadBaseConfig(bool _bReLoad)
+void QtTypicalTool::Settings::loadBaseConfig(bool _bReLoad)
 {
     if (_bReLoad) {
-        LogDebug(LogTip, TEXT("Settings::LoadBaseConfig: ReLoad."));
-        Json::Value temp;
-        jsonManage.SetJsonValue(temp); //清空 Json::Value
+        qDebug() <<TEXT("Settings::LoadBaseConfig: ReLoad.");
+        jsonManage.SetJsonValue(Json::Value()); //清空 Json::Value
     }
     else {
-        LogDebug(TEXT("Settings::LoadBaseConfig: Load."));
+        qDebug(TEXT("Settings::LoadBaseConfig: Load."));
     }
 
     //先创建文件夹(否则后面的文件不能创建): \\Tools\\Config
-    Tstr ConfigDirectory = Printf(TEXT("%s\\Config"), applicationDirPath);
-    applicationConfigPath = Printf(TEXT("%s%s"), ConfigDirectory, TEXT("\\Config.ini"));
-    fileSystem.SetPath(ConfigDirectory);
+    QString ConfigDirectory = Printf(TEXT("%s\\Config"), applicationDirPath.toStdString()).str().c_str();
+    applicationConfigPath = Printf(TEXT("%s%s"), ConfigDirectory.toStdString(), TEXT("\\Config.ini")).str().c_str();
+    fileSystem.SetPath(ConfigDirectory.toStdString());
     if (!fileSystem.CreateDirectorys()) {
-        LogDebug(LogWar, Printf(TEXT("Settings::LoadBaseConfig: 文件夹[%s]已存在!"), ConfigDirectory));
+        qDebug() << Printf(TEXT("Settings::LoadBaseConfig: 文件夹[%s]已存在!"), ConfigDirectory.toStdString()).str().c_str();
     }
 
     //文件不存在时，创建
-    if (jsonManage.Init(Printf(TEXT("%s"), applicationConfigPath), false)) {
-        LogDebug(LogWar, Printf(TEXT("Settings::LoadBaseConfig: 开始创建Json文件[%s]!"), applicationConfigPath));
-        LogDebug(Printf(TEXT("Settings::LoadBaseConfig: 配置文件初始化[%s]"), jsonManage.GetJsonFilePath()));
+    if (!jsonManage.Init(Printf(TEXT("%s"), applicationConfigPath.toStdString()).str().c_str(), true)) {
+        qDebug() << Printf(TEXT("Settings::LoadBaseConfig: 开始创建Json文件[%s]!"), applicationConfigPath.toStdString()).str().c_str();
+        qDebug() << Printf(TEXT("Settings::LoadBaseConfig: 配置文件初始化[%s]"), jsonManage.GetJsonFilePath()).str().c_str();
 
         // 基本设置
         Json::Value BaseConfig;
-        BaseConfig[TEXT("注册表开机自启动")] = TEXT("否");
+        BaseConfig[TEXT("注册表开机自启动")] = false;
 
         // ping百度配置
         Json::Value ping_baidu;
-        ping_baidu[TEXT("菜单按键")] = TEXT("是");
+        ping_baidu[TEXT("菜单按键")] = true;
         ping_baidu[TEXT("模式")] = TEXT("打开文件");
         ping_baidu[TEXT("文件")] = TEXT("cmd");
         ping_baidu[TEXT("参数")] = TEXT("/k ping -t www.baidu.com");
-        ping_baidu[TEXT("显示窗口")] = TEXT("是");
+        ping_baidu[TEXT("显示窗口")] = true;
 
         // 笔记本键盘开启配置
         Json::Value BookKeyOn;
-        BookKeyOn[TEXT("菜单按键")] = TEXT("是");
+        BookKeyOn[TEXT("菜单按键")] = true;
         BookKeyOn[TEXT("模式")] = TEXT("管理员运行");
         BookKeyOn[TEXT("文件")] = TEXT("cmd");
         BookKeyOn[TEXT("参数")] = TEXT("/k sc config i8042prt start= auto");
-        BookKeyOn[TEXT("显示窗口")] = TEXT("是");
+        BookKeyOn[TEXT("显示窗口")] = true;
 
         // 笔记本键盘关闭配置
         Json::Value BookKeyOff;
-        BookKeyOff[TEXT("菜单按键")] = TEXT("是");
+        BookKeyOff[TEXT("菜单按键")] = true;
         BookKeyOff[TEXT("模式")] = TEXT("管理员运行");
         BookKeyOff[TEXT("文件")] = TEXT("cmd");
         BookKeyOff[TEXT("参数")] = TEXT("/k sc config i8042prt start= disabled");
-        BookKeyOff[TEXT("显示窗口")] = TEXT("是");
+        BookKeyOff[TEXT("显示窗口")] = true;
 
         rootConfig[TEXT("基本设置")] = BaseConfig;
         rootConfig[TEXT("ping-baidu")] = ping_baidu;
@@ -190,135 +245,150 @@ void QtTypicalTool::Settings::LoadBaseConfig(bool _bReLoad)
         jsonManage.SetJsonValue(rootConfig);
         jsonManage.WriteJsonFile();
     }
-
-    if (!jsonManage.Init(Printf(TEXT("%s"), applicationConfigPath), true)) {
-        LogDebug(LogErr, Printf(TEXT("Settings::LoadBaseConfig: 读取文件[%s]失败!"), applicationConfigPath));
-    }
     else {
-        LogDebug(LogTip, Printf(TEXT("Settings::LoadBaseConfig: 读取文件[%s]成功!"), applicationConfigPath));
+        qDebug() <<Printf(TEXT("Settings::LoadBaseConfig: 读取文件[%s]成功!"), applicationConfigPath.toStdString()).str().c_str();
+        qDebug() << TEXT("Settings::LoadBaseConfig: jsonManage ToStreamString Start:");
+        jsonManage.ToStreamString();
+        qDebug() << TEXT("Settings::LoadBaseConfig: jsonManage ToStreamString End!");
+
+        rootConfig = jsonManage.GetJsonValue();
+        if (rootConfig.isObject() && rootConfig.isMember(TEXT("基本设置"))) {
+            bIsSelfAutoStarting = rootConfig[TEXT("基本设置")][(TEXT("注册表开机自启动"))].asBool();
+        }
+        else {
+            qDebug() << Printf(TEXT("Settings::UpdateConfig: 没有 rootConfig!")).str().c_str();
+        }
+        qDebug() << Printf(TEXT("Settings::UpdateConfig: 设置 开机自启动[%s]"), ToStr(bIsSelfAutoStarting)).str().c_str();
+        qDebug() << Printf(TEXT("Settings::UpdateConfig: rootConfig的配置数量[%s]"), ToStr(rootConfig.size())).str().c_str();
     }
 
-    UpdateConfig();
+    updateConfig();
 }
 
-void QtTypicalTool::Settings::UpdateConfig()
+void QtTypicalTool::Settings::updateConfig()
 {
-    if (!jsonManage.GetJsonValue().empty()) { //修改配置后, 重新加载
-        LogDebug(LogTip, TEXT("Settings::UpdateConfig: ReLoad."));
+    qDebug(TEXT("Typical_Tool::WindowsSystem::WindowShell::updateConfig"));
+
+    if (jsonManage.GetJsonValue().empty()) { //修改配置后, 重新加载
+        qDebug() << TEXT("Settings::UpdateConfig: jsonManage为空!");
         return;
     }
     //获取更新后的 rootConfig
-    rootConfig = jsonManage.GetJsonValue();
-
-    if (rootConfig.isMember(TEXT("基本设置"))) {
-        bIsSelfAutoStarting = rootConfig[TEXT("基本设置")].isMember(TEXT("注册表开机自启动"));
-    }
-    LogDebug(LogTip, Printf(TEXT("Settings::UpdateConfig: 设置 开机自启动[%s]"), ToStr(bIsSelfAutoStarting)));
-    LogDebug(Printf(TEXT("Settings::UpdateConfig: rootConfig的配置数量[%s]"), ToStr(rootConfig.size())));
+    qDebug() << TEXT("Settings::UpdateConfig: jsonManage ToStreamString Start:");
+    jsonManage.ToStreamString();
+    qDebug() << TEXT("Settings::UpdateConfig: jsonManage ToStreamString End!");
 
     //更新 开机自启动
-    Tstr ExePathName;
-    if (Win::GetExePathName(ExePathName)) {
-        if (bIsSelfAutoStarting != true) {
-            LogDebug(TEXT("Settings::UpdateConfig: 注册开机自启动[否]"), LogTip);
+    if (bIsSelfAutoStarting != true) {
+        qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动[false]"), LogTip);
 
-            if (Win::SetSelfStarting(applicationName, Printf(TEXT("\"%s\""), ExePathName).str(), TEXT(""), false)) {
-                LogDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 删除成功!"), LogTip);
-            }
-            else {
-                LogDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 删除失败!"), LogErr);
-            }
+        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s\""), applicationDirPath.toStdString()).str(), TEXT(""), false)) {
+            qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 删除成功!"), LogTip);
         }
         else {
-            LogDebug(TEXT("Settings::UpdateConfig: 注册开机自启动[是]"), LogTip);
-            if (Win::SetSelfStarting(applicationName, Printf(TEXT("\"%s\""), ExePathName).str(), TEXT(""), true)) {
-                LogDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 添加成功!"), LogTip);
-            }
-            else {
-                LogDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 添加失败!"), LogErr);
-            }
+            qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 删除失败!"), LogErr);
+        }
+    }
+    else {
+        qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动[true]"), LogTip);
+        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s\""), applicationDirPath.toStdString()).str(), TEXT(""), true)) {
+            qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 添加成功!"), LogTip);
+        }
+        else {
+            qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 添加失败!"), LogErr);
         }
     }
 }
 
-void QtTypicalTool::Settings::LoadShellConfig()
+void QtTypicalTool::Settings::loadShellConfig()
 {
-    if (shellConfig.empty()) { //修改配置后
-        LogDebug(LogTip, TEXT("ShellConfigInit() ReLoad"));
-        shellConfig.clear(); //清空Shell配置
+    if (!shellConfigList.empty()) { //修改配置后
+        qDebug() <<TEXT("ShellConfigInit() ReLoad");
+        shellConfigList.clear(); //清空Shell配置
         ExeRunItem.clear();
         ExeMenuItem.clear();
     }
     else {
-        LogDebug(TEXT("ShellConfigInit()"));
+        qDebug(TEXT("ShellConfigInit()"));
     }
 
     for (auto& ItConfig = rootConfig.begin(); ItConfig != rootConfig.end(); ++ItConfig) {
-        Tstr Key = ItConfig.key().asString();
+        QString OperateName = ItConfig.key().asString().c_str();
         Json::Value Value = *ItConfig;
 
         // 执行Shell配置（排除"基本设置"）
-        if (Key != TEXT("基本设置")) {
-            LogDebug(Printf(TEXT("ShellConfig: [%s]"), Key));
+        if (OperateName != TEXT("基本设置")) {
+            qDebug() << Printf(TEXT("ShellConfig: [%s]"), OperateName.toStdString()).str().c_str();
 
-            Tstr OperateMode;
-            Tstr File;
-            Tstr Args;
-            Tstr WindowShow;
-            Tstr MenuButton;
+            QString ShellOperate;
+            QString File;
+            QString Args;
+            bool WindowShow;
+            bool MenuButton;
 
             // 读取配置信息 - 使用Json::Value的安全访问方法
             if (Value.isMember("模式")) {
-                OperateMode = Value["模式"].asString();
-                LogDebug(Printf(TEXT("  操作模式: [%s]"), OperateMode));
+                ShellOperate = Value["模式"].asString().c_str();
+                qDebug() << Printf(TEXT("  操作模式: [%s]"), ShellOperate.toStdString()).str().c_str();
             }
             else {
-                LogDebug(Printf(TEXT("  ShellConfig: [%s]没有 操作模式!"), Key), LogWar);
+                qDebug() << Printf(TEXT("  ShellConfig: [%s]没有 操作模式!"), OperateName.toStdString()).str().c_str();
             }
 
             if (Value.isMember("文件")) {
-                File = Value["文件"].asString();
-                LogDebug(Printf(TEXT("  文件: %s"), File));
+                File = Value["文件"].asString().c_str();
+                qDebug() << Printf(TEXT("  文件: %s"), File.toStdString()).str().c_str();
             }
             else {
-                LogDebug(Printf(TEXT("  ShellConfig: [%s]没有 文件!"), Key), LogWar);
+                qDebug() << Printf(TEXT("  ShellConfig: [%s]没有 文件!"), OperateName.toStdString()).str().c_str();
             }
 
             if (Value.isMember("参数")) {
-                Args = Value["参数"].asString();
-                LogDebug(Printf(TEXT("  参数: %s"), Args));
+                Args = Value["参数"].asString().c_str();
+                qDebug() << Printf(TEXT("  参数: %s"), Args.toStdString()).str().c_str();
             }
             else {
-                LogDebug(Printf(TEXT("  ShellConfig: [%s]没有 参数!"), Key), LogWar);
+                qDebug() << Printf(TEXT("  ShellConfig: [%s]没有 参数!"), OperateName.toStdString()).str().c_str();
             }
 
             if (Value.isMember("显示窗口")) {
-                WindowShow = Value["显示窗口"].asString();
-                LogDebug(Printf(TEXT("  显示窗口: [%s]"), WindowShow));
+                WindowShow = Value["显示窗口"].asBool();
+                qDebug() << Printf(TEXT("  显示窗口: [%s]"), WindowShow).str().c_str();
             }
             else {
-                LogDebug(Printf(TEXT("  ShellConfig: [%s]没有 显示窗口!"), Key), LogWar);
+                qDebug() << Printf(TEXT("  ShellConfig: [%s]没有 显示窗口!"), OperateName.toStdString()).str().c_str();
             }
 
             if (Value.isMember("菜单按键")) {
-                MenuButton = Value["菜单按键"].asString();
-                LogDebug(Printf(TEXT("  菜单按键: [%s]"), MenuButton));
+                MenuButton = Value["菜单按键"].asBool();
+                qDebug() << Printf(TEXT("  菜单按键: [%s]"), MenuButton).str().c_str();
             }
             else {
-                LogDebug(Printf(TEXT("  ShellConfig: [%s]没有 菜单按键!"), Key), LogWar);
+                qDebug() << Printf(TEXT("  ShellConfig: [%s]没有 菜单按键!"), OperateName.toStdString()).str().c_str();
             }
 
-            shellConfig.push_back(tytl::Win::ShellConfig(Key, OperateMode, File, Args, WindowShow, MenuButton));
+            // 创建 ShellConfig 对象
+            ShellConfig* config = new ShellConfig();
+            config->setOperateName(OperateName);
+            config->setShellOperate(ShellOperate);
+            config->setFile(File);
+            config->setArg(Args);
+            config->setWindowShow(WindowShow);
+            config->setMenuButton(MenuButton);
+
+            // 将 ShellConfig 对象添加到 QVariantList
+            shellConfigList.append(QVariant::fromValue(config));
         }
         else {
-            LogDebug(Printf(TEXT("OtherConfig: [%s]"), Key));
+            qDebug() << Printf(TEXT("OtherConfig: [%s]"), OperateName.toStdString()).str().c_str();
         }
     }
 }
 
-void QtTypicalTool::Settings::LoadToolsMenu()
+void QtTypicalTool::Settings::loadToolsMenu()
 {
-    LogDebug(LogTip, TEXT("LoadToolsMenu() ReLoad"));
+    qDebug() <<TEXT("LoadToolsMenu");
+
     Menu->clear(); //清除现有菜单项
 
     //为Menu添加选项  
@@ -327,30 +397,36 @@ void QtTypicalTool::Settings::LoadToolsMenu()
     Menu->addSeparator();*/
 
     //Shell插入位置: Menu项总数 - 4
-    ShellOperate(Menu, shellConfig);
+    ShellOperate(Menu, shellConfigList);
 
+#ifdef _DEBUG
     QAction* ClickTestAction = new QAction("点击测试");
+#endif
     QAction* openSettingsAction = new QAction("设置");
     QAction* helpSettingsAction = new QAction("帮助");
     QAction* quitAction = new QAction("退出");
 
     Menu->addSeparator(); // 添加分隔符
+#ifdef _DEBUG
     Menu->addAction(ClickTestAction);
+#endif
     Menu->addAction(openSettingsAction);
     Menu->addAction(helpSettingsAction);
     Menu->addSeparator(); // 添加分隔符
     Menu->addAction(quitAction);
-    
-    SystemTrayIcon->setContextMenu(Menu);
+
+    SystemTrayIcon->setContextMenu(Menu); // 强制更新
     SystemTrayIcon->show();
 
     // 连接托盘菜单动作
     QObject::connect(openSettingsAction, &QAction::triggered, [this]() {
-        this->openSettingWindow();
+        this->openSettingWindow("openSettingsAction");
         });
+#ifdef _DEBUG
     QObject::connect(ClickTestAction, &QAction::triggered, [this]() {
         this->test();
         });
+#endif
 
     QObject::connect(quitAction, &QAction::triggered, Application, &QApplication::quit);
 
