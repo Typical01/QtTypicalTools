@@ -172,18 +172,7 @@ Window {
                         settings.logDebug("qml: ShellConfigList: ShellConfigList大小[" + shellConfigListSize +"]超出范围[1000]!")
                         return
                     }
-
-//                    for (var i = 0; i < shellConfigListSize; i++) {
-//                        settings.logDebug("qml: " + i)
-//                        settings.shellConfigListAppend(
-//                            settings.getShellConfigList()[i].operateName,
-//                            settings.getShellConfigList()[i].shellOperate,
-//                            settings.getShellConfigList()[i].file,
-//                            settings.getShellConfigList()[i].arg,
-//                            settings.getShellConfigList()[i].windowShow,
-//                            settings.getShellConfigList()[i].menuButton
-//                        );
-//                    }
+                    listViewShellConfig.currentIndex = 0
                 }
 
                 onCurrentIndexChanged: {
@@ -200,12 +189,8 @@ Window {
                     comboBoxMode.currentIndex = comboBoxMode.find(currentItem.getShellOperate())
                     textFieldFile.text = currentItem.getFile()
                     textFieldArg.text = currentItem.getArg()
-                    checkBoxShowWindow.checked = currentItem.getWindowShow() == true
-                    checkBoxMenuButton.checked = currentItem.getMenuButton() == true
-
-                    var operate = currentItem.getShellOperate();
-                    var comboBoxModeIndex = comboBoxMode.model.indexOf(operate);
-                    comboBoxMode.currentIndex = comboBoxModeIndex !== -1 ? comboBoxModeIndex : 0;
+                    checkBoxShowWindow.checked = currentItem.getWindowShow() === true
+                    checkBoxMenuButton.checked = currentItem.getMenuButton() === true
                 }
 
                 delegate: Rectangle {
@@ -252,7 +237,7 @@ Window {
                 Text {
                     id: sectionShellConfigName
                     anchors.fill: parent
-                    text: section == false ? "启动项" : "菜单项"
+                    text: section === false ? "启动项" : "菜单项"
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font.bold: true
@@ -304,6 +289,7 @@ Window {
                     font.pointSize: 10
                     font.family: "Microsoft YaHei"
                     Layout.preferredWidth: 400
+                    selectByMouse: true  // 启用鼠标选区
                     text: listViewShellConfig.currentIndex !== -1 ?
                               settings.getShellConfigList()[listViewShellConfig.currentIndex].m_operateName : ""
                     onTextChanged:  {
@@ -334,6 +320,7 @@ Window {
                     font.pointSize: 10
                     font.family: "Microsoft YaHei"
                     Layout.preferredWidth: 400
+                    selectByMouse: true  // 启用鼠标选区
                     text: listViewShellConfig.currentIndex !== -1 ?
                               settings.getShellConfigList()[listViewShellConfig.currentIndex].m_file : ""
                     onTextChanged: {
@@ -364,6 +351,7 @@ Window {
                     font.pointSize: 10
                     font.family: "Microsoft YaHei"
                     Layout.preferredWidth: 400
+                    selectByMouse: true  // 启用鼠标选区
                     text: listViewShellConfig.currentIndex !== -1 ?
                               settings.getShellConfigList()[listViewShellConfig.currentIndex].m_arg : ""
                     onTextChanged: {
@@ -397,19 +385,7 @@ Window {
 
                     onActivated: {
                         if (listViewShellConfig.currentIndex !== -1) {
-                            settings.getShellConfigList()[listViewShellConfig.currentIndex].m_shellOperate = currentText;
-                        }
-                    }
-
-                    onModelChanged: {
-                        if (listViewShellConfig.currentIndex !== -1) {
-                            comboBoxMode.currentIndex = settings.getShellConfigList()[listViewShellConfig.currentIndex].m_shellOperate;
-                        }
-                    }
-
-                    onCurrentIndexChanged: {
-                        if (listViewShellConfig.currentIndex !== -1) {
-                            settings.getShellConfigList()[listViewShellConfig.currentIndex].m_shellOperate = currentText;
+                            settings.getShellConfigList()[listViewShellConfig.currentIndex].setShellOperate(currentText);
                         }
                     }
                 }

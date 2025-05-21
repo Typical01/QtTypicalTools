@@ -39,7 +39,7 @@ void QtTypicalTool::Settings::customMessageHandler(QtMsgType type, const QMessag
 {
     static QFile file("./Log/log.txt");
     if (!file.isOpen()) {
-        file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text);
+        file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text);
     }
 
     QTextStream out(&file);
@@ -185,6 +185,8 @@ void QtTypicalTool::Settings::ExecuteAnalyze(QString OperateName, QString ShellO
         ShowWindow = 5;
     }
     qDebug() << Printf(TEXT("ExecuteAnalyze: 窗口显示 [%s]"), WindowShow).str().c_str();
+
+    ShellExecute(NULL, ShellOperate.toStdString().c_str(), ShellFile.toStdString().c_str(), ShellArg.toStdString().c_str(), NULL, ShowWindow);
 }
 
 void QtTypicalTool::Settings::loadBaseConfig(bool _bReLoad)
@@ -218,7 +220,7 @@ void QtTypicalTool::Settings::loadBaseConfig(bool _bReLoad)
         Json::Value ping_baidu;
         ping_baidu[TEXT("菜单按键")] = true;
         ping_baidu[TEXT("模式")] = TEXT("打开文件");
-        ping_baidu[TEXT("文件")] = TEXT("cmd");
+        ping_baidu[TEXT("文件")] = TEXT("cmd.exe");
         ping_baidu[TEXT("参数")] = TEXT("/k ping -t www.baidu.com");
         ping_baidu[TEXT("显示窗口")] = true;
 
@@ -226,7 +228,7 @@ void QtTypicalTool::Settings::loadBaseConfig(bool _bReLoad)
         Json::Value BookKeyOn;
         BookKeyOn[TEXT("菜单按键")] = true;
         BookKeyOn[TEXT("模式")] = TEXT("管理员运行");
-        BookKeyOn[TEXT("文件")] = TEXT("cmd");
+        BookKeyOn[TEXT("文件")] = TEXT("cmd.exe");
         BookKeyOn[TEXT("参数")] = TEXT("/k sc config i8042prt start= auto");
         BookKeyOn[TEXT("显示窗口")] = true;
 
@@ -234,7 +236,7 @@ void QtTypicalTool::Settings::loadBaseConfig(bool _bReLoad)
         Json::Value BookKeyOff;
         BookKeyOff[TEXT("菜单按键")] = true;
         BookKeyOff[TEXT("模式")] = TEXT("管理员运行");
-        BookKeyOff[TEXT("文件")] = TEXT("cmd");
+        BookKeyOff[TEXT("文件")] = TEXT("cmd.exe");
         BookKeyOff[TEXT("参数")] = TEXT("/k sc config i8042prt start= disabled");
         BookKeyOff[TEXT("显示窗口")] = true;
 
