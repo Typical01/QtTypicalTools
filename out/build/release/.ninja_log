@@ -1,8 +1,8 @@
 # ninja log v5
-7	1208	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/TypicalTools_autogen	2ffa412f954afab1
-7	1208	0	TypicalTools/CMakeFiles/TypicalTools_autogen	2ffa412f954afab1
-7	1208	0	TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	2ffa412f954afab1
-7	1208	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	2ffa412f954afab1
+7	124	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/TypicalTools_autogen	2ffa412f954afab1
+7	124	0	TypicalTools/CMakeFiles/TypicalTools_autogen	2ffa412f954afab1
+7	124	0	TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	2ffa412f954afab1
+7	124	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	2ffa412f954afab1
 1265	1372	7696017402266658	TypicalTools/CMakeFiles/TypicalTools.dir/qrc_qml.cpp.obj	9bbea6062f5f35a7
 1209	1244	7696017400911327	TypicalTools/qrc_qml.cpp	4b1eb59dbee83a9c
 1209	1244	7696017400911327	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/qrc_qml.cpp	4b1eb59dbee83a9c
@@ -12,7 +12,15 @@
 4565	4787	7696017435885745	TypicalTools/TypicalTools.exe	7bc735c42d949ae0
 1252	2067	7696017408746983	TypicalTools/CMakeFiles/TypicalTools.dir/src/ShellConfig.cpp.obj	e360f7bd6ad54d98
 1256	2154	7696017410055387	TypicalTools/CMakeFiles/TypicalTools.dir/src/ShellConfigModel.cpp.obj	6b9797716d8f7caf
-7	124	0	TypicalTools/CMakeFiles/TypicalTools_autogen	2ffa412f954afab1
-7	124	0	TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	2ffa412f954afab1
-7	124	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/TypicalTools_autogen	2ffa412f954afab1
-7	124	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	2ffa412f954afab1
+8	350	0	TypicalTools/CMakeFiles/TypicalTools_autogen	2ffa412f954afab1
+8	350	0	TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	2ffa412f954afab1
+8	350	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/CMakeFiles/TypicalTools_autogen	2ffa412f954afab1
+8	350	0	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/TypicalTools_autogen/mocs_compilation.cpp	2ffa412f954afab1
+351	441	7696038378022198	TypicalTools/qrc_qml.cpp	4b1eb59dbee83a9c
+351	441	7696038378022198	C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/release/TypicalTools/qrc_qml.cpp	4b1eb59dbee83a9c
+457	568	7696038379834592	TypicalTools/CMakeFiles/TypicalTools.dir/qrc_qml.cpp.obj	9bbea6062f5f35a7
+449	1420	7696038388197606	TypicalTools/CMakeFiles/TypicalTools.dir/src/ShellConfigModel.cpp.obj	6b9797716d8f7caf
+453	3051	7696038403921384	TypicalTools/CMakeFiles/TypicalTools.dir/src/main.cpp.obj	2b9c2ebd856a5e9b
+441	3464	7696038408094319	TypicalTools/CMakeFiles/TypicalTools.dir/TypicalTools_autogen/mocs_compilation.cpp.obj	ac3aa29b2c3789fe
+445	3928	7696038413327756	TypicalTools/CMakeFiles/TypicalTools.dir/src/Settings.cpp.obj	5678880fb1caf26f
+3929	4120	7696038414767691	TypicalTools/TypicalTools.exe	7bc735c42d949ae0

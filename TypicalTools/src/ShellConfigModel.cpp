@@ -38,11 +38,17 @@ QVariant ShellConfigModel::data(const QModelIndex& index, int role) const
     }
 }
 
-Q_INVOKABLE void ShellConfigModel::forceLayout()
+Q_INVOKABLE void ShellConfigModel::forceLayout(bool bIsSort)
 {
+    if (bIsSort) {
+        sort();
+    }
     // 实现逻辑，例如发出 dataChanged 信号以刷新视图
     emit dataChanged(index(0, 0), index(rowCount() - 1, 0));
+}
 
+void ShellConfigModel::sort()
+{
     std::sort(m_data.begin(), m_data.end());
     std::partition(m_data.begin(), m_data.end(), [](ShellConfig* shellConfig) {
         return !shellConfig->getMenuButton();

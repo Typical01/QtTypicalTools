@@ -48,11 +48,6 @@ public:
         if (index >= 0 && index < m_data.size()) {
             beginRemoveRows(QModelIndex(), index, index);
             m_data.removeAt(index);
-            std::sort(m_data.begin(), m_data.end());
-            std::partition(m_data.begin(), m_data.end(), [](ShellConfig* shellConfig) {
-                return !shellConfig->getMenuButton();
-                }
-            );
             endRemoveRows();
         }
     }
@@ -64,7 +59,8 @@ public:
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
     Q_INVOKABLE int getRowCount() const { return rowCount(); }
-    Q_INVOKABLE void forceLayout();
+    Q_INVOKABLE void forceLayout(bool bIsSort = false);
+    Q_INVOKABLE void sort();
 
     // 可选：添加数据的函数
     Q_INVOKABLE void addShellConfig(ShellConfig* config);
@@ -78,11 +74,6 @@ public:
         beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
         ShellConfig* config = new ShellConfig(operateName, shellOperate, file, arg, windowShow, menuButton);
         m_data.append(config);
-        std::sort(m_data.begin(), m_data.end());
-        std::partition(m_data.begin(), m_data.end(), [](ShellConfig* shellConfig) {
-            return !shellConfig->getMenuButton();
-            }
-        );
         endInsertRows();
     }
     Q_INVOKABLE bool removeShellConfig(int index);

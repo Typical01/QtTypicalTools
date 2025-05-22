@@ -102,6 +102,8 @@ Window {
                             true,
                             true
                         )
+                        settings.shellConfigModel.forceLayout()
+                        listViewShellConfig.currentIndex = listViewShellConfig.model.getRowCount() - 1
 
 //                        settings.shellConfigListAppend(
 //                            "新项",
@@ -140,8 +142,16 @@ Window {
 
                     onClicked: {
                         settings.logDebug("qml: Clicked: buttonShellConfigDel")
-
-                        settings.shellConfigModel.removeShellConfig(listViewShellConfig.currentIndex)
+                        var tempIndex = listViewShellConfig.currentIndex
+                        if (tempIndex === listViewShellConfig.model.getRowCount() - 1) {
+                            settings.shellConfigModel.removeShellConfig(tempIndex)
+                            listViewShellConfig.currentIndex = tempIndex - 1
+                        }
+                        else {
+                            settings.shellConfigModel.removeShellConfig(tempIndex)
+                            listViewShellConfig.currentIndex = tempIndex
+                        }
+                        settings.shellConfigModel.forceLayout()
 
 //                        settings.shellConfigListRemove(listViewShellConfig.currentIndex)
 //                        listViewShellConfig.model = []; // 清空模型
@@ -223,8 +233,6 @@ Window {
                         checkBoxShowWindow.checked = currentItem.m_windowShow
                         checkBoxMenuButton.checked = currentItem.m_menuButton
 
-                        settings.shellConfigModel.forceLayout()
-                        settings.shellConfigModel.forceLayout()
                     } else {
                         shellConfigItem.visible = false
                     }
@@ -362,7 +370,8 @@ Window {
                     //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_operateName : ""
                     onTextChanged:  {
                         if (listViewShellConfig.currentIndex !== -1) {
-                           settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_operateName = text
+                            settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_operateName = text
+                            settings.shellConfigModel.forceLayout()
                             //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_operateName = text
                         }
                     }
@@ -459,6 +468,7 @@ Window {
                     onActivated: {
                         if (listViewShellConfig.currentIndex !== -1) {
                             settings.shellConfigModel.get(listViewShellConfig.currentIndex).setShellOperate(currentText);
+                            settings.shellConfigModel.forceLayout()
                             //settings.getShellConfigList()[listViewShellConfig.currentIndex].setShellOperate(currentText);
                         }
                     }
@@ -504,6 +514,7 @@ Window {
                     onToggled: {
                         if (listViewShellConfig.currentIndex !== -1) {
                             settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_menuButton = checked
+                            settings.shellConfigModel.forceLayout()
 //                    checked: settings.getShellConfigList()[listViewShellConfig.currentIndex].m_menuButton
 //                    onToggled: settings.getShellConfigList()[listViewShellConfig.currentIndex].m_menuButton = checked
                         }
@@ -534,8 +545,7 @@ Window {
 
                     onClicked: {
                         settings.logDebug("qml: Clicked: buttonSettingSave")
-                        settings.shellConfigModel.forceLayout()
-                        settings.shellConfigModel.forceLayout()
+                        settings.shellConfigModel.forceLayout(true)
                         listViewShellConfig.currentIndex = -1
 
                         settings.logDebug("qml: Clicked: updateConfig ModelCount: " + settings.shellConfigModel.getRowCount())

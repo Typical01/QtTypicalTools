@@ -1,10 +1,10 @@
-[2025-05-22 15:20:29][WARNING] Log::SetLogWriteLevel: 文件输出级别[All]
-[2025-05-22 15:20:29][INFO]    Log::SetLogFileWriteConfig: 日志输出文件名[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/Log\TypicalTools_Log.txt]
-[2025-05-22 15:20:29][INFO]    Log::CreateLogFileManageThread: [C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/Log\TypicalTools_Log.txt]打开文件成功!
-[2025-05-22 15:20:29][INFO]    Log::CreateLogFileManageThread: 日志写入线程 启动!
-[2025-05-22 15:20:29][INFO]    创建文件夹:[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config][目录] 存在!
-[2025-05-22 15:20:29][WARNING] JsonManage::ToStreamString: JsonData to string: 
-[2025-05-22 15:20:29]          {
+[2025-05-22 15:56:58][WARNING] Log::SetLogWriteLevel: 文件输出级别[All]
+[2025-05-22 15:56:58][INFO]    Log::SetLogFileWriteConfig: 日志输出文件名[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/Log\TypicalTools_Log.txt]
+[2025-05-22 15:56:58][INFO]    Log::CreateLogFileManageThread: [C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools/Log\TypicalTools_Log.txt]打开文件成功!
+[2025-05-22 15:56:58][INFO]    Log::CreateLogFileManageThread: 日志写入线程 启动!
+[2025-05-22 15:56:58][INFO]    创建文件夹:[C:/Typical/ProgramProject/Qt_Projects/TypicalTools/TypicalTools/out/build/debug/TypicalTools\Config][目录] 存在!
+[2025-05-22 15:56:58][WARNING] JsonManage::ToStreamString: JsonData to string: 
+[2025-05-22 15:56:58]          {
     "ping-baidu" : 
     {
         "参数" : "/k ping -t www.baidu.com",
@@ -16,6 +16,14 @@
     "基本设置" : 
     {
         "注册表开机自启动" : false
+    },
+    "新项" : 
+    {
+        "参数" : "",
+        "文件" : "",
+        "显示窗口" : true,
+        "模式" : "打开文件夹",
+        "菜单按键" : false
     },
     "新项1" : 
     {
@@ -38,7 +46,7 @@
         "参数" : "",
         "文件" : "",
         "显示窗口" : true,
-        "模式" : "打开文件",
+        "模式" : "打开文件夹",
         "菜单按键" : false
     },
     "新项4" : 
@@ -46,7 +54,7 @@
         "参数" : "",
         "文件" : "",
         "显示窗口" : true,
-        "模式" : "打开文件",
+        "模式" : "管理员运行",
         "菜单按键" : false
     },
     "笔记本键盘关" : 
@@ -66,8 +74,8 @@
         "菜单按键" : true
     }
 }
-[2025-05-22 15:21:06][WARNING] JsonManage::ToStreamString: JsonData to string: 
-[2025-05-22 15:21:06]          {
+[2025-05-22 15:57:04][WARNING] JsonManage::ToStreamString: JsonData to string: 
+[2025-05-22 15:57:04]          {
     "ping-baidu" : 
     {
         "参数" : "/k ping -t www.baidu.com",
@@ -79,6 +87,14 @@
     "基本设置" : 
     {
         "注册表开机自启动" : false
+    },
+    "新项" : 
+    {
+        "参数" : "",
+        "文件" : "",
+        "显示窗口" : true,
+        "模式" : "打开文件夹",
+        "菜单按键" : false
     },
     "新项1" : 
     {
@@ -101,7 +117,7 @@
         "参数" : "",
         "文件" : "",
         "显示窗口" : true,
-        "模式" : "打开文件",
+        "模式" : "打开文件夹",
         "菜单按键" : false
     },
     "新项4" : 
@@ -109,7 +125,7 @@
         "参数" : "",
         "文件" : "",
         "显示窗口" : true,
-        "模式" : "打开文件",
+        "模式" : "管理员运行",
         "菜单按键" : false
     },
     "笔记本键盘关" : 
@@ -129,9 +145,9 @@
         "菜单按键" : true
     }
 }
-[2025-05-22 15:21:06][INFO]    注册表修改成功!
-[2025-05-22 15:21:06][WARNING] JsonManage::ToStreamString: JsonData to string: 
-[2025-05-22 15:21:06]          {
+[2025-05-22 15:57:04][INFO]    注册表修改成功!
+[2025-05-22 15:57:04][WARNING] JsonManage::ToStreamString: JsonData to string: 
+[2025-05-22 15:57:04]          {
     "ping-baidu" : 
     {
         "参数" : "/k ping -t www.baidu.com",
@@ -143,6 +159,14 @@
     "基本设置" : 
     {
         "注册表开机自启动" : false
+    },
+    "新项" : 
+    {
+        "参数" : "",
+        "文件" : "",
+        "显示窗口" : true,
+        "模式" : "打开文件夹",
+        "菜单按键" : false
     },
     "新项1" : 
     {
@@ -165,7 +189,7 @@
         "参数" : "",
         "文件" : "",
         "显示窗口" : true,
-        "模式" : "打开文件",
+        "模式" : "打开文件夹",
         "菜单按键" : false
     },
     "新项4" : 
@@ -173,47 +197,7 @@
         "参数" : "",
         "文件" : "",
         "显示窗口" : true,
-        "模式" : "打开文件",
-        "菜单按键" : false
-    },
-    "新项5" : 
-    {
-        "参数" : "",
-        "文件" : "",
-        "显示窗口" : true,
-        "模式" : "打开文件",
-        "菜单按键" : false
-    },
-    "新项6" : 
-    {
-        "参数" : "",
-        "文件" : "",
-        "显示窗口" : true,
-        "模式" : "打开文件",
-        "菜单按键" : false
-    },
-    "新项7" : 
-    {
-        "参数" : "",
-        "文件" : "",
-        "显示窗口" : true,
-        "模式" : "打开文件",
-        "菜单按键" : false
-    },
-    "新项8" : 
-    {
-        "参数" : "",
-        "文件" : "",
-        "显示窗口" : true,
-        "模式" : "打开文件",
-        "菜单按键" : false
-    },
-    "新项9" : 
-    {
-        "参数" : "",
-        "文件" : "",
-        "显示窗口" : true,
-        "模式" : "打开文件",
+        "模式" : "管理员运行",
         "菜单按键" : false
     },
     "笔记本键盘关" : 
