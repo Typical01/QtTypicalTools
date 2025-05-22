@@ -105,11 +105,15 @@ int main(int argc, char* argv[])
         margin: 5px 0;
     }
 )");
-    SettingsInstance->loadBaseConfig(false);
+    SettingsInstance->loadBaseConfig();
     SettingsInstance->loadShellConfig();
 
     SettingsInstance->loadToolsMenu();
     SettingsInstance->ExeRunItemShell();
+
+#ifdef _DEBUG
+    SettingsInstance->openSettingWindow("Debug");
+#endif
 
     return app->exec();
 }

@@ -26,6 +26,7 @@
 
 
 #include <ShellConfig.h>
+#include <ShellConfigModel.h>
 
 
 #include <TypicalTool/Tool.h>
@@ -42,6 +43,7 @@ namespace QtTypicalTool {
     
         Q_PROPERTY(bool bIsSelfAutoStarting READ getIsSelfAutoStarting WRITE setIsSelfAutoStarting NOTIFY isSelfAutoStartingChanged)
         Q_PROPERTY(QVariantList shellConfigList READ getShellConfigList WRITE setShellConfigList NOTIFY shellConfigListChanged)
+        Q_PROPERTY(ShellConfigModel* shellConfigModel READ getShellConfigModel WRITE setShellConfigModel NOTIFY shellConfigModelChanged)
 
     public:
         Settings(QObject* parent = nullptr);
@@ -66,6 +68,7 @@ namespace QtTypicalTool {
         FileSystem fileSystem;
 
         QVariantList shellConfigList;
+        ShellConfigModel* shellConfigModel;
         std::vector<ShellConfig> ExeRunItem; //程序启动项
         std::map<int32_t, ShellConfig*> ExeMenuItem; //程序菜单项
 
@@ -74,10 +77,24 @@ namespace QtTypicalTool {
 
     public:
         int32_t GetIntId();
-        void ShellOperate(QMenu* _Menu, QVariantList& _ShellConfig);
+        //void ShellOperate(QMenu* _Menu, QVariantList& _ShellConfig);
+        void ShellOperate(QMenu* _Menu, ShellConfigModel* _shellConfigModel);
         void ExeRunItemShell();
         void ExeMenuItemShell(int32_t _MenuItemID);
         void ExecuteAnalyze(QString OperateName, QString ShellOperate, QString ShellFile, QString ShellArg = TEXT(""), bool WindowShow = true);
+
+        void shellConfigListSort()
+        {
+            auto comparator = [](const QVariant& a, const QVariant& b) {
+                ShellConfig* itemA = qvariant_cast<ShellConfig*>(a);
+                ShellConfig* itemB = qvariant_cast<ShellConfig*>(b);
+                if (itemA && itemB) {
+                    return itemA->getMenuButton() < itemB->getMenuButton();
+                }
+                return false;
+                };
+            std::sort(shellConfigList.begin(), shellConfigList.end(), comparator);
+        }
 
     public:
         void Initialize(QApplication* _Application, const QString& _applicationName, const QString& _applicationDirPath);
@@ -92,6 +109,13 @@ namespace QtTypicalTool {
                 emit shellConfigListChanged();
             }
         }
+        Q_INVOKABLE ShellConfigModel* getShellConfigModel() const { return shellConfigModel; }
+        Q_INVOKABLE void setShellConfigModel(ShellConfigModel* model) {
+            if (shellConfigModel != model) {
+                shellConfigModel->setData(*model);
+                emit shellConfigModelChanged();
+            }
+        }
         Q_INVOKABLE bool getIsSelfAutoStarting() const { return bIsSelfAutoStarting; }
         Q_INVOKABLE void setIsSelfAutoStarting(const bool& IsSelfAutoStarting) {
             if (bIsSelfAutoStarting != IsSelfAutoStarting) {
@@ -102,13 +126,14 @@ namespace QtTypicalTool {
 
     signals:
         void shellConfigListChanged();
+        void shellConfigModelChanged();
         void isSelfAutoStartingChanged();
 
     public slots:
 
-        void loadBaseConfig(bool _bReLoad);
+        void loadBaseConfig();
         void updateConfig();
-        void loadShellConfig();
+        void loadShellConfig(bool reLoad = false);
         void loadToolsMenu();
 
         void logDebug(const QString& message)
@@ -121,7 +146,7 @@ namespace QtTypicalTool {
         }
 
         void help() {
-            QMessageBox::warning(nullptr, "TypicalTools", "帮助: 本程序由Qt框架制作.\nQt: https://download.qt.io/archive/qt/5.12/5.12.0/single/qt-everywhere-src-5.12.0.zip");
+            QMessageBox::warning(nullptr, "TypicalTools: 帮助", "作者: Typical01\nGithub: https://github.com/Typical01\n\n本程序由Qt框架制作.\nQt: https://download.qt.io/archive/qt/5.12/5.12.0/single/qt-everywhere-src-5.12.0.zip");
         }
 
         void openSettingWindow(const QString& _ComponentName) {
@@ -143,6 +168,8 @@ namespace QtTypicalTool {
             QmlApplicationEngine = new QQmlApplicationEngine();
             if (QmlApplicationEngine->rootContext() != nullptr) {
                 QmlApplicationEngine->rootContext()->setContextProperty("settings", this);
+                //QmlApplicationEngine->rootContext()->setContextProperty("shellConfigModel", shellConfigModel);
+
                 return true;
             }
             return false;
@@ -176,6 +203,7 @@ namespace QtTypicalTool {
 
             // 将 ShellConfig 对象添加到 QVariantList
             shellConfigList.append(QVariant::fromValue(config));
+            shellConfigListSort();
         }
         void shellConfigListRemove(int index)
         {
@@ -190,6 +218,7 @@ namespace QtTypicalTool {
             jsonBase["注册表开机自启动"] = bIsSelfAutoStarting;
             rootConfig[TEXT("基本设置")] = jsonBase;
 
+#ifdef QVariantList
             for (int index = 0; index < shellConfigList.size(); ++index) {
                 qDebug() << "saveData: QmlList[listViewShellConfig] Item Count: " << index;
 
@@ -211,6 +240,32 @@ namespace QtTypicalTool {
                 rootConfig[config->getOperateName().toStdString()] = json;
                 qDebug() << "saveData: operateName:  " << config->getOperateName();
             }
+#else
+            for (int index = 0; index < shellConfigModel->rowCount(); ++index) {
+                QModelIndex modelIndex = shellConfigModel->index(index, 0);
+                QString operateName = shellConfigModel->data(modelIndex, ShellConfigModel::OperateNameRole).toString();
+                QString shellOperate = shellConfigModel->data(modelIndex, ShellConfigModel::ShellOperateRole).toString();
+                QString file = shellConfigModel->data(modelIndex, ShellConfigModel::FileRole).toString();
+                QString arg = shellConfigModel->data(modelIndex, ShellConfigModel::ArgRole).toString();
+                bool windowShow = shellConfigModel->data(modelIndex, ShellConfigModel::WindowShowRole).toBool();
+                bool menuButton = shellConfigModel->data(modelIndex, ShellConfigModel::MenuButtonRole).toBool();
+
+                Json::Value json;
+                json["模式"] = shellOperate.toStdString();
+                qDebug() << "saveData: shellOperate: " << shellOperate;
+                json["文件"] = file.toStdString();
+                qDebug() << "saveData: file: " << file;
+                json["参数"] = arg.toStdString();
+                qDebug() << "saveData: arg: " << arg;
+                json["显示窗口"] = windowShow;
+                qDebug() << "saveData: windowShow: " << windowShow;
+                json["菜单按键"] = menuButton;
+                qDebug() << "saveData: menuButton: " << menuButton;
+
+                rootConfig[operateName.toStdString()] = json;
+                qDebug() << "saveData: operateName: " << operateName;
+            }
+#endif
 
             jsonManage.SetJsonValue(rootConfig);
             jsonManage.ToStreamString();

@@ -7,7 +7,6 @@ import com.example.shell 1.0
 import com.example.settings 1.0
 
 
-
 Window {
     id: rootWindow
     visible: true
@@ -21,6 +20,13 @@ Window {
     minimumHeight: 800
     //title: settings.applicationWindowTitleName
     flags: Qt.Dialog | Qt.WindowMinMaxButtonsHint | Qt.WindowSystemMenuHint | Qt.WindowTitleHint
+
+    function delay(duration) {
+        var start = new Date().getTime()
+        while (new Date().getTime() - start < duration) {
+            // 阻塞等待
+        }
+    }
 
     // Main
     ColumnLayout {
@@ -87,7 +93,8 @@ Window {
 
                     onClicked: {
                         settings.logDebug("qml: Clicked: buttonShellConfigAdd")
-                        settings.shellConfigListAppend(
+
+                        settings.shellConfigModel.addShellConfig(
                             "新项",
                             "打开文件",
                             "",
@@ -95,8 +102,17 @@ Window {
                             true,
                             true
                         )
-                        listViewShellConfig.model = []; // 清空模型
-                        listViewShellConfig.model = settings.getShellConfigList(); // 重新绑定模型
+
+//                        settings.shellConfigListAppend(
+//                            "新项",
+//                            "打开文件",
+//                            "",
+//                            "",
+//                            true,
+//                            true
+//                        )
+//                        listViewShellConfig.model = []; // 清空模型
+//                        listViewShellConfig.model = settings.getShellConfigList(); // 重新绑定模型
                     }
                     onPressed: {
                         buttonShellConfigAddBackground.color = "black"
@@ -124,9 +140,12 @@ Window {
 
                     onClicked: {
                         settings.logDebug("qml: Clicked: buttonShellConfigDel")
-                        settings.shellConfigListRemove(listViewShellConfig.currentIndex)
-                        listViewShellConfig.model = []; // 清空模型
-                        listViewShellConfig.model = settings.getShellConfigList(); // 重新绑定模型
+
+                        settings.shellConfigModel.removeShellConfig(listViewShellConfig.currentIndex)
+
+//                        settings.shellConfigListRemove(listViewShellConfig.currentIndex)
+//                        listViewShellConfig.model = []; // 清空模型
+//                        listViewShellConfig.model = settings.getShellConfigList(); // 重新绑定模型
                     }
                     onPressed: {
                         buttonShellConfigDelBackground.color = "black"
@@ -147,9 +166,8 @@ Window {
             // 分隔线
             Rectangle {
                 Layout.fillWidth: true
-                height: 2
+                height: 1
                 color: "#cccccc"
-                border { width: 1; color: "#aaaaaa" }
             }
 
             ListView {
@@ -163,34 +181,53 @@ Window {
 
                 focus: true
 
-                model: settings.getShellConfigList()
+                //model: settings.getShellConfigList()
+                model: settings.shellConfigModel
 
                 Component.onCompleted: {
                     settings.logDebug("qml: ShellConfigList: onCompleted")
-                    var shellConfigListSize = settings.getShellConfigList().length
-                    if (shellConfigListSize > 1000) {
-                        settings.logDebug("qml: ShellConfigList: ShellConfigList大小[" + shellConfigListSize +"]超出范围[1000]!")
-                        return
-                    }
-                    listViewShellConfig.currentIndex = 0
+//                    var shellConfigListSize = settings.getShellConfigList().length
+//                    if (shellConfigListSize > 1000) {
+//                        settings.logDebug("qml: ShellConfigList: ShellConfigList大小[" + shellConfigListSize +"]超出范围[1000]!")
+//                        return
+//                    }
                 }
 
-                onCurrentIndexChanged: {
-                    if (listViewShellConfig.currentIndex != -1) {
-                        shellConfigItem.visible = true
-                    }
-                    else {
-                        shellConfigItem.visible = false
-                        return
-                    }
+//                onCurrentIndexChanged: {
+//                    var ItemIndex = listViewShellConfig.currentIndex
+//                    if (ItemIndex != -1) {
+//                        shellConfigItem.visible = true
+//                    }
+//                    else {
+//                        shellConfigItem.visible = false
+//                        return
+//                    }
 
-                    var currentItem = settings.getShellConfigList()[listViewShellConfig.currentIndex]
-                    textFieldOperateName.text = currentItem.getOperateName()
-                    comboBoxMode.currentIndex = comboBoxMode.find(currentItem.getShellOperate())
-                    textFieldFile.text = currentItem.getFile()
-                    textFieldArg.text = currentItem.getArg()
-                    checkBoxShowWindow.checked = currentItem.getWindowShow() === true
-                    checkBoxMenuButton.checked = currentItem.getMenuButton() === true
+//                    var currentItem = settings.getShellConfigList()[ItemIndex]
+//                    textFieldOperateName.text = currentItem.getOperateName()
+//                    comboBoxMode.currentIndex = comboBoxMode.find(currentItem.getShellOperate())
+//                    textFieldFile.text = currentItem.getFile()
+//                    textFieldArg.text = currentItem.getArg()
+//                    checkBoxShowWindow.checked = currentItem.getWindowShow() === true
+//                    checkBoxMenuButton.checked = currentItem.getMenuButton() === true
+//                }
+                onCurrentIndexChanged: {
+                    var currentItem = listViewShellConfig.model.get(listViewShellConfig.currentIndex)
+                    if (currentItem) {
+                        shellConfigItem.visible = true
+
+                        textFieldOperateName.text = currentItem.m_operateName
+                        comboBoxMode.currentIndex = comboBoxMode.find(currentItem.m_shellOperate)
+                        textFieldFile.text = currentItem.m_file
+                        textFieldArg.text = currentItem.m_arg
+                        checkBoxShowWindow.checked = currentItem.m_windowShow
+                        checkBoxMenuButton.checked = currentItem.m_menuButton
+
+                        settings.shellConfigModel.forceLayout()
+                        settings.shellConfigModel.forceLayout()
+                    } else {
+                        shellConfigItem.visible = false
+                    }
                 }
 
                 delegate: Rectangle {
@@ -200,11 +237,40 @@ Window {
                     border.color: "#cccccc"
                     border.width: 1
 
-                    Text {
+                    Row {
+                        spacing: 10
                         anchors.centerIn: parent
-                        text: settings.getShellConfigList()[index].getOperateName()
-                        font.pointSize: 10
-                        font.family: "Microsoft YaHei"
+
+                        Image {
+                            width: 32
+                            height: 32
+                            source: {
+                                    switch (model.shellOperate) {
+                                        case "open":
+                                            return "qrc:/qt/qml/typicaltools/resource/Icon/File.ico";
+                                        case "explore":
+                                            return "qrc:/qt/qml/typicaltools/resource/Icon/Folder.ico";
+                                        case "runas":
+                                            return "qrc:/qt/qml/typicaltools/resource/Icon/Administrator.ico";
+                                        case "打开文件":
+                                            return "qrc:/qt/qml/typicaltools/resource/Icon/File.ico";
+                                        case "打开文件夹":
+                                            return "qrc:/qt/qml/typicaltools/resource/Icon/Folder.ico";
+                                        case "管理员运行":
+                                            return "qrc:/qt/qml/typicaltools/resource/Icon/Administrator.ico";
+                                        default:
+                                            settings.logDebug("图标: " + model.m_shellOperate)
+                                            return "qrc:/qt/qml/typicaltools/resource/Icon/DeerAndPipe.ico";
+                                    }
+                                }
+                        }
+
+                        Text {
+                            //text: settings.getShellConfigList()[index].getOperateName()
+                            text: model.operateName
+                            font.pointSize: 10
+                            font.family: "Microsoft YaHei"
+                        }
                     }
 
                     MouseArea {
@@ -221,6 +287,7 @@ Window {
                 }
 
                 section {
+                    //property: "modelData.m_menuButton"
                     property: "menuButton"
                     criteria: ViewSection.FullString
                     delegate: sectionShellConfig
@@ -232,12 +299,13 @@ Window {
             id: sectionShellConfig
             Rectangle{
                 width: listViewShellConfig.width
-                color: "#cccccc"
-                height: 30
+                color: "#dddeee"
+                height: 24
                 Text {
-                    id: sectionShellConfigName
                     anchors.fill: parent
-                    text: section === false ? "启动项" : "菜单项"
+                    font.pointSize: 10
+                    font.family: "Microsoft YaHei"
+                    text: section === "true" ? "菜单项" : "启动项"
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font.bold: true
@@ -248,9 +316,8 @@ Window {
         // 分隔线
         Rectangle {
             Layout.fillWidth: true
-            height: 2
+            height: 1
             color: "#cccccc"
-            border { width: 1; color: "#aaaaaa" }
         }
 
         // 配置: ShellConfigItem 
@@ -291,10 +358,12 @@ Window {
                     Layout.preferredWidth: 400
                     selectByMouse: true  // 启用鼠标选区
                     text: listViewShellConfig.currentIndex !== -1 ?
-                              settings.getShellConfigList()[listViewShellConfig.currentIndex].m_operateName : ""
+                              settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_operateName : ""
+                    //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_operateName : ""
                     onTextChanged:  {
                         if (listViewShellConfig.currentIndex !== -1) {
-                           settings.getShellConfigList()[listViewShellConfig.currentIndex].m_operateName = text
+                           settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_operateName = text
+                            //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_operateName = text
                         }
                     }
                 }
@@ -322,10 +391,12 @@ Window {
                     Layout.preferredWidth: 400
                     selectByMouse: true  // 启用鼠标选区
                     text: listViewShellConfig.currentIndex !== -1 ?
-                              settings.getShellConfigList()[listViewShellConfig.currentIndex].m_file : ""
+                              settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_file : ""
+                    //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_file : ""
                     onTextChanged: {
                         if (listViewShellConfig.currentIndex !== -1) {
-                           settings.getShellConfigList()[listViewShellConfig.currentIndex].m_file = text
+                           settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_file = text
+                            //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_file = text
                         }
                     }
                 }
@@ -353,10 +424,12 @@ Window {
                     Layout.preferredWidth: 400
                     selectByMouse: true  // 启用鼠标选区
                     text: listViewShellConfig.currentIndex !== -1 ?
-                              settings.getShellConfigList()[listViewShellConfig.currentIndex].m_arg : ""
+                              settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_arg : ""
+                    //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_arg : ""
                     onTextChanged: {
                         if (listViewShellConfig.currentIndex !== -1) {
-                           settings.getShellConfigList()[listViewShellConfig.currentIndex].m_arg = text
+                           settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_arg = text
+                            //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_arg = text
                         }
                     }
                 }
@@ -385,7 +458,8 @@ Window {
 
                     onActivated: {
                         if (listViewShellConfig.currentIndex !== -1) {
-                            settings.getShellConfigList()[listViewShellConfig.currentIndex].setShellOperate(currentText);
+                            settings.shellConfigModel.get(listViewShellConfig.currentIndex).setShellOperate(currentText);
+                            //settings.getShellConfigList()[listViewShellConfig.currentIndex].setShellOperate(currentText);
                         }
                     }
                 }
@@ -403,10 +477,12 @@ Window {
                     font.pointSize: 10
                     font.family: "Microsoft YaHei"
                     checked: listViewShellConfig.currentIndex !== -1 ?
-                                 settings.getShellConfigList()[listViewShellConfig.currentIndex].m_windowShow : true
+                         settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_windowShow : true
+                         //settings.getShellConfigList()[listViewShellConfig.currentIndex].m_windowShow : true
                     onToggled: {
                         if (listViewShellConfig.currentIndex !== -1) {
-                            settings.getShellConfigList()[listViewShellConfig.currentIndex].m_windowShow = checked
+                            settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_windowShow = checked
+//                            settings.getShellConfigList()[listViewShellConfig.currentIndex].m_windowShow = checked
                         }
                     }
                 }
@@ -423,8 +499,15 @@ Window {
                     text: "菜单按钮"
                     font.pointSize: 10
                     font.family: "Microsoft YaHei"
-                    checked: settings.getShellConfigList()[listViewShellConfig.currentIndex].m_menuButton
-                    onToggled: settings.getShellConfigList()[listViewShellConfig.currentIndex].m_menuButton = checked
+                    checked: listViewShellConfig.currentIndex !== -1 ?
+                                 settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_menuButton : false
+                    onToggled: {
+                        if (listViewShellConfig.currentIndex !== -1) {
+                            settings.shellConfigModel.get(listViewShellConfig.currentIndex).m_menuButton = checked
+//                    checked: settings.getShellConfigList()[listViewShellConfig.currentIndex].m_menuButton
+//                    onToggled: settings.getShellConfigList()[listViewShellConfig.currentIndex].m_menuButton = checked
+                        }
+                    }
                 }
             }
         }
@@ -451,12 +534,22 @@ Window {
 
                     onClicked: {
                         settings.logDebug("qml: Clicked: buttonSettingSave")
+                        settings.shellConfigModel.forceLayout()
+                        settings.shellConfigModel.forceLayout()
+                        listViewShellConfig.currentIndex = -1
+
+                        settings.logDebug("qml: Clicked: updateConfig ModelCount: " + settings.shellConfigModel.getRowCount())
                         settings.updateConfig(true)
+                        settings.logDebug("qml: Clicked: saveData ModelCount: " + settings.shellConfigModel.getRowCount())
                         settings.saveData();
-                        settings.loadShellConfig()
+                        settings.logDebug("qml: Clicked: loadShellConfig ModelCount: " + settings.shellConfigModel.getRowCount())
+                        settings.loadShellConfig(true)
+                        settings.logDebug("qml: Clicked: loadToolsMenu ModelCount: " + settings.shellConfigModel.getRowCount())
                         settings.loadToolsMenu()
-                        listViewShellConfig.model = []; // 清空模型
-                        listViewShellConfig.model = settings.getShellConfigList(); // 重新绑定模型
+
+
+//                        listViewShellConfig.model = []; // 清空模型
+//                        listViewShellConfig.model = settings.getShellConfigList(); // 重新绑定模型
                     }
                     onPressed: {
                         buttonSettingSaveBackground.color = "black"

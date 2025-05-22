@@ -1,8 +1,9 @@
 #include "Settings.h"
 
 
-QtTypicalTool::Settings::Settings(QObject *parent)
-	: QObject(parent), Application(nullptr), SystemTrayIcon(nullptr), Menu(nullptr), QmlApplicationEngine(nullptr)
+QtTypicalTool::Settings::Settings(QObject* parent)
+    : QObject(parent), Application(nullptr), SystemTrayIcon(nullptr), Menu(nullptr), QmlApplicationEngine(nullptr)
+    , shellConfigModel(new ShellConfigModel(this))
 {
     bEnginValid = onLoadEngine();
 }
@@ -29,10 +30,10 @@ void QtTypicalTool::Settings::Initialize(QApplication* _Application, const QStri
 
     qInstallMessageHandler(Settings::customMessageHandler); 
     qRegisterMetaType<ShellConfig*>("ShellConfig*");
+    qRegisterMetaType<ShellConfigModel*>("ShellConfigModel*");
     qmlRegisterType<ShellConfig>("com.example.shell", 1, 0, "ShellConfig");
+    qmlRegisterType<ShellConfigModel>("com.example.shell", 1, 0, "ShellConfigModel");
     qmlRegisterType<Settings>("com.example.settings", 1, 0, "Settings");
-
-    qDebug() << TEXT("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n程序开始!\n");
 }
 
 void QtTypicalTool::Settings::customMessageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg)
@@ -83,12 +84,13 @@ int32_t QtTypicalTool::Settings::GetIntId()
     return IntId++;
 }
 
-void QtTypicalTool::Settings::ShellOperate(QMenu* _Menu, QVariantList& _ShellConfig) {
+void QtTypicalTool::Settings::ShellOperate(QMenu* _Menu, ShellConfigModel* _shellConfigModel) {
     qDebug(TEXT("Typical_Tool::WindowsSystem::WindowShell::ShellOperate"));
 
-    for (auto tempShell = _ShellConfig.begin(); tempShell != _ShellConfig.end(); ++tempShell) {
+    for (auto tempShell = _shellConfigModel->getData().begin(); tempShell != _shellConfigModel->getData().end(); ++tempShell) {
         // 判断类型
-        ShellConfig* config = qvariant_cast<ShellConfig*>(*tempShell);
+        //ShellConfig* config = qvariant_cast<ShellConfig*>(tempShell);
+        ShellConfig* config = *tempShell;
         if (!config) {
             qWarning() << "Failed to cast QVariant to ShellConfig*";
             continue;
@@ -189,15 +191,9 @@ void QtTypicalTool::Settings::ExecuteAnalyze(QString OperateName, QString ShellO
     ShellExecute(NULL, ShellOperate.toStdString().c_str(), ShellFile.toStdString().c_str(), ShellArg.toStdString().c_str(), NULL, ShowWindow);
 }
 
-void QtTypicalTool::Settings::loadBaseConfig(bool _bReLoad)
+void QtTypicalTool::Settings::loadBaseConfig()
 {
-    if (_bReLoad) {
-        qDebug() <<TEXT("Settings::LoadBaseConfig: ReLoad.");
-        jsonManage.SetJsonValue(Json::Value()); //清空 Json::Value
-    }
-    else {
-        qDebug(TEXT("Settings::LoadBaseConfig: Load."));
-    }
+    qDebug(TEXT("Settings::LoadBaseConfig: Load."));
 
     //先创建文件夹(否则后面的文件不能创建): \\Tools\\Config
     QString ConfigDirectory = Printf(TEXT("%s\\Config"), applicationDirPath.toStdString()).str().c_str();
@@ -263,8 +259,6 @@ void QtTypicalTool::Settings::loadBaseConfig(bool _bReLoad)
         qDebug() << Printf(TEXT("Settings::UpdateConfig: 设置 开机自启动[%s]"), ToStr(bIsSelfAutoStarting)).str().c_str();
         qDebug() << Printf(TEXT("Settings::UpdateConfig: rootConfig的配置数量[%s]"), ToStr(rootConfig.size())).str().c_str();
     }
-
-    updateConfig();
 }
 
 void QtTypicalTool::Settings::updateConfig()
@@ -302,17 +296,16 @@ void QtTypicalTool::Settings::updateConfig()
     }
 }
 
-void QtTypicalTool::Settings::loadShellConfig()
+void QtTypicalTool::Settings::loadShellConfig(bool reLoad)
 {
-    if (!shellConfigList.empty()) { //修改配置后
-        qDebug() <<TEXT("ShellConfigInit() ReLoad");
-        shellConfigList.clear(); //清空Shell配置
+    if (!shellConfigModel->empty()) { //修改配置后
+        qDebug() << shellConfigModel->getData().size();
         ExeRunItem.clear();
         ExeMenuItem.clear();
     }
-    else {
-        qDebug(TEXT("ShellConfigInit()"));
-    }
+
+    // 重新加载: 只加载 菜单/启动项
+    if (reLoad) return;
 
     for (auto& ItConfig = rootConfig.begin(); ItConfig != rootConfig.end(); ++ItConfig) {
         QString OperateName = ItConfig.key().asString().c_str();
@@ -379,7 +372,9 @@ void QtTypicalTool::Settings::loadShellConfig()
             config->setMenuButton(MenuButton);
 
             // 将 ShellConfig 对象添加到 QVariantList
-            shellConfigList.append(QVariant::fromValue(config));
+            shellConfigModel->addShellConfig(config);
+            //shellConfigList.append(QVariant::fromValue(config));
+            //shellConfigListSort();
         }
         else {
             qDebug() << Printf(TEXT("OtherConfig: [%s]"), OperateName.toStdString()).str().c_str();
@@ -399,7 +394,8 @@ void QtTypicalTool::Settings::loadToolsMenu()
     Menu->addSeparator();*/
 
     //Shell插入位置: Menu项总数 - 4
-    ShellOperate(Menu, shellConfigList);
+    //ShellOperate(Menu, shellConfigList);
+    ShellOperate(Menu, shellConfigModel);
 
 #ifdef _DEBUG
     QAction* ClickTestAction = new QAction("点击测试");

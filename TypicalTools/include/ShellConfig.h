@@ -32,6 +32,18 @@ public:
 	ShellConfig(const ShellConfig& otherObject);
 	~ShellConfig();
 
+	bool ShellConfig::operator<(const ShellConfig& other) const { 
+		if (!this->m_menuButton && other.m_menuButton) {
+			return true;
+		}
+		else if (this->m_menuButton && !other.m_menuButton) {
+			return false;
+		}
+		else {
+			return this->m_operateName < other.m_operateName;
+		}
+	}
+
 public:
 	Q_INVOKABLE QString getOperateName() const { return m_operateName; }
 	Q_INVOKABLE void setOperateName(const QString& operateName) {
