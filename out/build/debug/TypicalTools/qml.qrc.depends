@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/qt/qml/typicaltools">
-        <file>resource/Icon/DeerAndPipe.ico</file>
-        <file>resource/Icon/File.ico</file>
-        <file>resource/Icon/Folder.ico</file>
-        <file>resource/Icon/Administrator.ico</file>
-        <file>resource/main.qml</file>
-    </qresource>
-</RCC>

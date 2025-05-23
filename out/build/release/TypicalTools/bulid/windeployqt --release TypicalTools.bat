@@ -1,1 +1,0 @@
-windeployqt --release --qmldir=../../../../../TypicalTools/resource TypicalTools.exe

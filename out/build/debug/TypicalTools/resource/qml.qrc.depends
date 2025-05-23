@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/qt/qml/typicaltools">
-        <file>main.qml</file>
-        <file>Icon/DeerAndPipe.ico</file>
-        <file>Font/msyh.ttc</file>
-    </qresource>
-</RCC>
