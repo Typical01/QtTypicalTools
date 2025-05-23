@@ -12,7 +12,7 @@
 
 #include <QObject>
 #include <QDebug>
-#include <QUrl>
+#include <QDir>
 #include <QQuickView>
 
 #include <QSharedMemory>

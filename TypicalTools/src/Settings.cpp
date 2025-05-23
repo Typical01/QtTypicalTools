@@ -278,7 +278,8 @@ void QtTypicalTool::Settings::updateConfig()
     if (bIsSelfAutoStarting != true) {
         qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动[false]"), LogTip);
 
-        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s.exe\""), applicationDirPath.toStdString()).str(), TEXT(""), false)) {
+        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s\\%s.exe\""), 
+            QDir::toNativeSeparators(applicationDirPath).toStdString(), QDir::toNativeSeparators(applicationName).toStdString()).str(), TEXT(""), false)) {
             qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 删除成功!"), LogTip);
         }
         else {
@@ -287,7 +288,8 @@ void QtTypicalTool::Settings::updateConfig()
     }
     else {
         qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动[true]"), LogTip);
-        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s.exe\""), applicationDirPath.toStdString()).str(), TEXT(""), true)) {
+        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s\\%s.exe\""), 
+            QDir::toNativeSeparators(applicationDirPath).toStdString(), QDir::toNativeSeparators(applicationName).toStdString()).str(), TEXT(""), true)) {
             qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 添加成功!"), LogTip);
         }
         else {
