@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
     app->setApplicationName("TypicalTools");  // 设置应用程序名称
     app->setQuitOnLastWindowClosed(false);
 
-    QIcon Icon(":/qt/qml/typicaltools/resource/Icon/DeerAndPipe.ico");
+    QIcon Icon(":/qt/qml/typicaltools/resource/Icon/TypicalTools.ico");
     app->setWindowIcon(Icon);
 
     //单例运行
