@@ -2,7 +2,7 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
-//#include <QQmlEngine>
+
 #include <QApplication>
 #include <QCoreApplication>
 #include <QQmlApplicationEngine>
@@ -54,13 +54,11 @@ namespace QtTypicalTool {
         QSystemTrayIcon* SystemTrayIcon;
         QMenu* Menu;
         QQmlApplicationEngine* QmlApplicationEngine;
-        bool bEnginValid;
 
     public:
         QString applicationName;
         QString applicationDirPath;
         QString applicationWindowTitleName = TEXT("TypicalTools v1.1");
-
         QString applicationConfigPath;
 
         Json::Value rootConfig;
@@ -69,7 +67,7 @@ namespace QtTypicalTool {
 
         QVariantList shellConfigList;
         ShellConfigModel* shellConfigModel;
-        std::vector<ShellConfig> ExeRunItem; //程序启动项
+        std::vector<ShellConfig*> ExeRunItem; //程序启动项
         std::map<int32_t, ShellConfig*> ExeMenuItem; //程序菜单项
 
         bool bIsSelfAutoStarting = false;
@@ -146,47 +144,41 @@ namespace QtTypicalTool {
         }
 
         void help() {
-            QMessageBox::warning(nullptr, "TypicalTools: 帮助", "作者: Typical01\nGithub: https://github.com/Typical01\n\n本程序由Qt框架制作.\nQt: https://download.qt.io/archive/qt/5.12/5.12.0/single/qt-everywhere-src-5.12.0.zip");
+            QMessageBox::warning(nullptr, "TypicalTools: 帮助", 
+                "作者: Typical01\nGithub: https://github.com/Typical01\n\n本程序由Qt框架制作.\nQt: https://download.qt.io/archive/qt/5.12/5.12.0/single/qt-everywhere-src-5.12.0.zip");
         }
 
-        void openSettingWindow(const QString& _ComponentName) {
-            //offLoadEngine(_ComponentName);
-            //onLoadEngine();
-            if (!bEnginValid) {
-                qDebug() << Printf(TEXT("openSettingWindow: Qml引擎无效!")).str().c_str();
-                return;
+        void openSettingWindow() {
+            offLoadEngine();
+            if (QmlApplicationEngine) {
+                QmlApplicationEngine->load(QUrl(QStringLiteral("qrc:/qt/qml/typicaltools/resource/main.qml")));
+
+                if (QmlApplicationEngine->rootObjects().isEmpty()) {
+                    QMessageBox::critical(nullptr, "TypicalTools", "加载 QML 文件失败！");
+                    delete QmlApplicationEngine;
+                    QmlApplicationEngine = nullptr;
+                }
             }
-            QmlApplicationEngine->load(QUrl(QStringLiteral("qrc:/qt/qml/typicaltools/main.qml")));
         }
 
-        void destroySettingWindow(const QString& _ComponentName) {
-            //offLoadEngine(_ComponentName);
-        }
-
-        bool onLoadEngine() {
-            // 使用 QQmlApplicationEngine 加载 QML 文件
+        void onLoadEngine() {
             QmlApplicationEngine = new QQmlApplicationEngine();
-            if (QmlApplicationEngine->rootContext() != nullptr) {
-                QmlApplicationEngine->rootContext()->setContextProperty("settings", this);
-                //QmlApplicationEngine->rootContext()->setContextProperty("shellConfigModel", shellConfigModel);
-
-                return true;
-            }
-            return false;
+            QmlApplicationEngine->rootContext()->setContextProperty("settings", this);
         }
 
-        bool offLoadEngine(const QString& _ComponentName) {
-            if (QmlApplicationEngine != nullptr) {
-                qDebug() << Printf(TEXT("[%s]offLoadEngine: 释放Qml引擎资源!"), _ComponentName.toStdString()).str().c_str();
-                QmlApplicationEngine->deleteLater();
-                QCoreApplication::processEvents();
-                QmlApplicationEngine->clearComponentCache();
-                QmlApplicationEngine->collectGarbage();
-                delete QmlApplicationEngine;
+        void offLoadEngine() {
+            if (QmlApplicationEngine) {
+                for (QObject* object : QmlApplicationEngine->rootObjects()) {
+                    QWindow* window = qobject_cast<QWindow*>(object);
+                    if (window) {
+                        window->close();
+                    }
+                }
 
-                return true;
+                if (!QmlApplicationEngine->rootObjects().isEmpty()) {
+                    QmlApplicationEngine->rootObjects().first()->deleteLater();
+                }
             }
-            return false;
         }
 
         void shellConfigListAppend(const QString& OperateName, const QString& ShellOperate, const QString& File,
@@ -211,7 +203,7 @@ namespace QtTypicalTool {
         }
 
         void saveData() {
-            qDebug() << "saveData: QmlList[listViewShellConfig] Item Sun: " << shellConfigList.size();
+            qDebug() << "saveData: QmlList[listViewShellConfig] Item Sun: " << shellConfigModel->rowCount();
             rootConfig.clear();
 
             Json::Value jsonBase;

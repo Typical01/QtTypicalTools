@@ -5,7 +5,7 @@ QtTypicalTool::Settings::Settings(QObject* parent)
     : QObject(parent), Application(nullptr), SystemTrayIcon(nullptr), Menu(nullptr), QmlApplicationEngine(nullptr)
     , shellConfigModel(new ShellConfigModel(this))
 {
-    bEnginValid = onLoadEngine();
+    onLoadEngine();
 }
 
 QtTypicalTool::Settings::~Settings()
@@ -128,13 +128,11 @@ void QtTypicalTool::Settings::ExeRunItemShell() {
     //遍历执行所有: 程序启动项
     if (ExeRunItem.size() > 0) {
         for (auto tempShell = ExeRunItem.begin(); tempShell != ExeRunItem.end(); tempShell++) {
-            auto OperateName = tempShell->getOperateName();
-            auto ShellOperate = tempShell->getShellOperate();
-            auto File = tempShell->getFile();
-            auto Arg = tempShell->getArg();
-            auto WindowShow = tempShell->getWindowShow();
-
-            ExecuteAnalyze(OperateName, ShellOperate, File, Arg, WindowShow);
+            ExecuteAnalyze((*tempShell)->getOperateName(), 
+                (*tempShell)->getShellOperate(),
+                (*tempShell)->getFile(),
+                (*tempShell)->getArg(),
+                (*tempShell)->getWindowShow());
         }
     }
     else {
@@ -148,14 +146,16 @@ void QtTypicalTool::Settings::ExeMenuItemShell(int32_t _MenuItemID) {
     auto tempIndex = ExeMenuItem.find(_MenuItemID);
     if (tempIndex != ExeMenuItem.end()) {
         ShellConfig* tempShellConfig = tempIndex->second;
-
-        QString OperateName = tempShellConfig->getOperateName();
-        QString ShellOperate = tempShellConfig->getShellOperate();
-        QString File = tempShellConfig->getFile();
-        QString Arg = tempShellConfig->getArg();
-        bool WindowShow = tempShellConfig->getWindowShow();
-
-        ExecuteAnalyze(OperateName, ShellOperate, File, Arg, WindowShow);
+        if (tempShellConfig) {
+            ExecuteAnalyze(tempShellConfig->getOperateName(),
+                tempShellConfig->getShellOperate(),
+                tempShellConfig->getFile(),
+                tempShellConfig->getArg(),
+                tempShellConfig->getWindowShow());
+        }
+        else {
+            qDebug() << Printf(TEXT("ExeMenuItemShell: ShellConfig无效 [%s]!"), _MenuItemID).str().c_str();
+        }
     }
     else {
         qDebug() << Printf(TEXT("ExeMenuItemShell: 没有找到菜单选项 [%s]!"), _MenuItemID).str().c_str();
@@ -278,7 +278,7 @@ void QtTypicalTool::Settings::updateConfig()
     if (bIsSelfAutoStarting != true) {
         qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动[false]"), LogTip);
 
-        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s\""), applicationDirPath.toStdString()).str(), TEXT(""), false)) {
+        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s.exe\""), applicationDirPath.toStdString()).str(), TEXT(""), false)) {
             qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 删除成功!"), LogTip);
         }
         else {
@@ -287,7 +287,7 @@ void QtTypicalTool::Settings::updateConfig()
     }
     else {
         qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动[true]"), LogTip);
-        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s\""), applicationDirPath.toStdString()).str(), TEXT(""), true)) {
+        if (Win::SetSelfStarting(applicationName.toStdString(), Printf(TEXT("\"%s.exe\""), applicationDirPath.toStdString()).str(), TEXT(""), true)) {
             qDebug(TEXT("Settings::UpdateConfig: 注册开机自启动 添加成功!"), LogTip);
         }
         else {
@@ -298,14 +298,17 @@ void QtTypicalTool::Settings::updateConfig()
 
 void QtTypicalTool::Settings::loadShellConfig(bool reLoad)
 {
-    if (!shellConfigModel->empty()) { //修改配置后
-        qDebug() << shellConfigModel->getData().size();
-        ExeRunItem.clear();
-        ExeMenuItem.clear();
+    // 重新加载: 只加载 菜单/启动项
+    if (reLoad) {
+        if (!shellConfigModel->empty()) { //修改配置后
+            qDebug() << shellConfigModel->getData().size();
+            ExeRunItem.clear();
+            ExeMenuItem.clear();
+        }
+
+        return;
     }
 
-    // 重新加载: 只加载 菜单/启动项
-    if (reLoad) return;
 
     for (auto& ItConfig = rootConfig.begin(); ItConfig != rootConfig.end(); ++ItConfig) {
         QString OperateName = ItConfig.key().asString().c_str();
@@ -418,7 +421,7 @@ void QtTypicalTool::Settings::loadToolsMenu()
 
     // 连接托盘菜单动作
     QObject::connect(openSettingsAction, &QAction::triggered, [this]() {
-        this->openSettingWindow("openSettingsAction");
+        this->openSettingWindow();
         });
 #ifdef _DEBUG
     QObject::connect(ClickTestAction, &QAction::triggered, [this]() {

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_QtTypicalTool__Settings_t {
-    QByteArrayData data[42];
-    char stringdata0[610];
+    QByteArrayData data[40];
+    char stringdata0[574];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,33 +46,31 @@ QT_MOC_LITERAL(11, 172, 7), // "message"
 QT_MOC_LITERAL(12, 180, 4), // "test"
 QT_MOC_LITERAL(13, 185, 4), // "help"
 QT_MOC_LITERAL(14, 190, 17), // "openSettingWindow"
-QT_MOC_LITERAL(15, 208, 14), // "_ComponentName"
-QT_MOC_LITERAL(16, 223, 20), // "destroySettingWindow"
-QT_MOC_LITERAL(17, 244, 12), // "onLoadEngine"
-QT_MOC_LITERAL(18, 257, 13), // "offLoadEngine"
-QT_MOC_LITERAL(19, 271, 21), // "shellConfigListAppend"
-QT_MOC_LITERAL(20, 293, 11), // "OperateName"
-QT_MOC_LITERAL(21, 305, 12), // "ShellOperate"
-QT_MOC_LITERAL(22, 318, 4), // "File"
-QT_MOC_LITERAL(23, 323, 4), // "Args"
-QT_MOC_LITERAL(24, 328, 10), // "WindowShow"
-QT_MOC_LITERAL(25, 339, 10), // "MenuButton"
-QT_MOC_LITERAL(26, 350, 21), // "shellConfigListRemove"
-QT_MOC_LITERAL(27, 372, 5), // "index"
-QT_MOC_LITERAL(28, 378, 8), // "saveData"
-QT_MOC_LITERAL(29, 387, 18), // "getShellConfigList"
-QT_MOC_LITERAL(30, 406, 18), // "setShellConfigList"
-QT_MOC_LITERAL(31, 425, 4), // "list"
-QT_MOC_LITERAL(32, 430, 19), // "getShellConfigModel"
-QT_MOC_LITERAL(33, 450, 17), // "ShellConfigModel*"
-QT_MOC_LITERAL(34, 468, 19), // "setShellConfigModel"
-QT_MOC_LITERAL(35, 488, 5), // "model"
-QT_MOC_LITERAL(36, 494, 21), // "getIsSelfAutoStarting"
-QT_MOC_LITERAL(37, 516, 21), // "setIsSelfAutoStarting"
-QT_MOC_LITERAL(38, 538, 18), // "IsSelfAutoStarting"
-QT_MOC_LITERAL(39, 557, 19), // "bIsSelfAutoStarting"
-QT_MOC_LITERAL(40, 577, 15), // "shellConfigList"
-QT_MOC_LITERAL(41, 593, 16) // "shellConfigModel"
+QT_MOC_LITERAL(15, 208, 12), // "onLoadEngine"
+QT_MOC_LITERAL(16, 221, 13), // "offLoadEngine"
+QT_MOC_LITERAL(17, 235, 21), // "shellConfigListAppend"
+QT_MOC_LITERAL(18, 257, 11), // "OperateName"
+QT_MOC_LITERAL(19, 269, 12), // "ShellOperate"
+QT_MOC_LITERAL(20, 282, 4), // "File"
+QT_MOC_LITERAL(21, 287, 4), // "Args"
+QT_MOC_LITERAL(22, 292, 10), // "WindowShow"
+QT_MOC_LITERAL(23, 303, 10), // "MenuButton"
+QT_MOC_LITERAL(24, 314, 21), // "shellConfigListRemove"
+QT_MOC_LITERAL(25, 336, 5), // "index"
+QT_MOC_LITERAL(26, 342, 8), // "saveData"
+QT_MOC_LITERAL(27, 351, 18), // "getShellConfigList"
+QT_MOC_LITERAL(28, 370, 18), // "setShellConfigList"
+QT_MOC_LITERAL(29, 389, 4), // "list"
+QT_MOC_LITERAL(30, 394, 19), // "getShellConfigModel"
+QT_MOC_LITERAL(31, 414, 17), // "ShellConfigModel*"
+QT_MOC_LITERAL(32, 432, 19), // "setShellConfigModel"
+QT_MOC_LITERAL(33, 452, 5), // "model"
+QT_MOC_LITERAL(34, 458, 21), // "getIsSelfAutoStarting"
+QT_MOC_LITERAL(35, 480, 21), // "setIsSelfAutoStarting"
+QT_MOC_LITERAL(36, 502, 18), // "IsSelfAutoStarting"
+QT_MOC_LITERAL(37, 521, 19), // "bIsSelfAutoStarting"
+QT_MOC_LITERAL(38, 541, 15), // "shellConfigList"
+QT_MOC_LITERAL(39, 557, 16) // "shellConfigModel"
 
     },
     "QtTypicalTool::Settings\0shellConfigListChanged\0"
@@ -80,8 +78,7 @@ QT_MOC_LITERAL(41, 593, 16) // "shellConfigModel"
     "isSelfAutoStartingChanged\0loadBaseConfig\0"
     "updateConfig\0loadShellConfig\0reLoad\0"
     "loadToolsMenu\0logDebug\0message\0test\0"
-    "help\0openSettingWindow\0_ComponentName\0"
-    "destroySettingWindow\0onLoadEngine\0"
+    "help\0openSettingWindow\0onLoadEngine\0"
     "offLoadEngine\0shellConfigListAppend\0"
     "OperateName\0ShellOperate\0File\0Args\0"
     "WindowShow\0MenuButton\0shellConfigListRemove\0"
@@ -101,42 +98,41 @@ static const uint qt_meta_data_QtTypicalTool__Settings[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
-       3,  188, // properties
+      23,   14, // methods
+       3,  176, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  134,    2, 0x06 /* Public */,
-       3,    0,  135,    2, 0x06 /* Public */,
-       4,    0,  136,    2, 0x06 /* Public */,
+       1,    0,  129,    2, 0x06 /* Public */,
+       3,    0,  130,    2, 0x06 /* Public */,
+       4,    0,  131,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,  137,    2, 0x0a /* Public */,
-       6,    0,  138,    2, 0x0a /* Public */,
-       7,    1,  139,    2, 0x0a /* Public */,
-       7,    0,  142,    2, 0x2a /* Public | MethodCloned */,
-       9,    0,  143,    2, 0x0a /* Public */,
-      10,    1,  144,    2, 0x0a /* Public */,
-      12,    0,  147,    2, 0x0a /* Public */,
-      13,    0,  148,    2, 0x0a /* Public */,
-      14,    1,  149,    2, 0x0a /* Public */,
-      16,    1,  152,    2, 0x0a /* Public */,
-      17,    0,  155,    2, 0x0a /* Public */,
-      18,    1,  156,    2, 0x0a /* Public */,
-      19,    6,  159,    2, 0x0a /* Public */,
-      26,    1,  172,    2, 0x0a /* Public */,
-      28,    0,  175,    2, 0x0a /* Public */,
+       5,    0,  132,    2, 0x0a /* Public */,
+       6,    0,  133,    2, 0x0a /* Public */,
+       7,    1,  134,    2, 0x0a /* Public */,
+       7,    0,  137,    2, 0x2a /* Public | MethodCloned */,
+       9,    0,  138,    2, 0x0a /* Public */,
+      10,    1,  139,    2, 0x0a /* Public */,
+      12,    0,  142,    2, 0x0a /* Public */,
+      13,    0,  143,    2, 0x0a /* Public */,
+      14,    0,  144,    2, 0x0a /* Public */,
+      15,    0,  145,    2, 0x0a /* Public */,
+      16,    0,  146,    2, 0x0a /* Public */,
+      17,    6,  147,    2, 0x0a /* Public */,
+      24,    1,  160,    2, 0x0a /* Public */,
+      26,    0,  163,    2, 0x0a /* Public */,
 
  // methods: name, argc, parameters, tag, flags
-      29,    0,  176,    2, 0x02 /* Public */,
-      30,    1,  177,    2, 0x02 /* Public */,
-      32,    0,  180,    2, 0x02 /* Public */,
-      34,    1,  181,    2, 0x02 /* Public */,
-      36,    0,  184,    2, 0x02 /* Public */,
-      37,    1,  185,    2, 0x02 /* Public */,
+      27,    0,  164,    2, 0x02 /* Public */,
+      28,    1,  165,    2, 0x02 /* Public */,
+      30,    0,  168,    2, 0x02 /* Public */,
+      32,    1,  169,    2, 0x02 /* Public */,
+      34,    0,  172,    2, 0x02 /* Public */,
+      35,    1,  173,    2, 0x02 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -152,26 +148,25 @@ static const uint qt_meta_data_QtTypicalTool__Settings[] = {
     QMetaType::Void, QMetaType::QString,   11,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   15,
-    QMetaType::Void, QMetaType::QString,   15,
-    QMetaType::Bool,
-    QMetaType::Bool, QMetaType::QString,   15,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Bool, QMetaType::Bool,   20,   21,   22,   23,   24,   25,
-    QMetaType::Void, QMetaType::Int,   27,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Bool, QMetaType::Bool,   18,   19,   20,   21,   22,   23,
+    QMetaType::Void, QMetaType::Int,   25,
     QMetaType::Void,
 
  // methods: parameters
     QMetaType::QVariantList,
-    QMetaType::Void, QMetaType::QVariantList,   31,
-    0x80000000 | 33,
-    QMetaType::Void, 0x80000000 | 33,   35,
+    QMetaType::Void, QMetaType::QVariantList,   29,
+    0x80000000 | 31,
+    QMetaType::Void, 0x80000000 | 31,   33,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   38,
+    QMetaType::Void, QMetaType::Bool,   36,
 
  // properties: name, type, flags
-      39, QMetaType::Bool, 0x00495003,
-      40, QMetaType::QVariantList, 0x00495103,
-      41, 0x80000000 | 33, 0x0049510b,
+      37, QMetaType::Bool, 0x00495003,
+      38, QMetaType::QVariantList, 0x00495103,
+      39, 0x80000000 | 31, 0x0049510b,
 
  // properties: notify_signal_id
        2,
@@ -198,30 +193,27 @@ void QtTypicalTool::Settings::qt_static_metacall(QObject *_o, QMetaObject::Call 
         case 8: _t->logDebug((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 9: _t->test(); break;
         case 10: _t->help(); break;
-        case 11: _t->openSettingWindow((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 12: _t->destroySettingWindow((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 13: { bool _r = _t->onLoadEngine();
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 14: { bool _r = _t->offLoadEngine((*reinterpret_cast< const QString(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 15: _t->shellConfigListAppend((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4])),(*reinterpret_cast< const bool(*)>(_a[5])),(*reinterpret_cast< const bool(*)>(_a[6]))); break;
-        case 16: _t->shellConfigListRemove((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 17: _t->saveData(); break;
-        case 18: { QVariantList _r = _t->getShellConfigList();
+        case 11: _t->openSettingWindow(); break;
+        case 12: _t->onLoadEngine(); break;
+        case 13: _t->offLoadEngine(); break;
+        case 14: _t->shellConfigListAppend((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4])),(*reinterpret_cast< const bool(*)>(_a[5])),(*reinterpret_cast< const bool(*)>(_a[6]))); break;
+        case 15: _t->shellConfigListRemove((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->saveData(); break;
+        case 17: { QVariantList _r = _t->getShellConfigList();
             if (_a[0]) *reinterpret_cast< QVariantList*>(_a[0]) = std::move(_r); }  break;
-        case 19: _t->setShellConfigList((*reinterpret_cast< const QVariantList(*)>(_a[1]))); break;
-        case 20: { ShellConfigModel* _r = _t->getShellConfigModel();
+        case 18: _t->setShellConfigList((*reinterpret_cast< const QVariantList(*)>(_a[1]))); break;
+        case 19: { ShellConfigModel* _r = _t->getShellConfigModel();
             if (_a[0]) *reinterpret_cast< ShellConfigModel**>(_a[0]) = std::move(_r); }  break;
-        case 21: _t->setShellConfigModel((*reinterpret_cast< ShellConfigModel*(*)>(_a[1]))); break;
-        case 22: { bool _r = _t->getIsSelfAutoStarting();
+        case 20: _t->setShellConfigModel((*reinterpret_cast< ShellConfigModel*(*)>(_a[1]))); break;
+        case 21: { bool _r = _t->getIsSelfAutoStarting();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 23: _t->setIsSelfAutoStarting((*reinterpret_cast< const bool(*)>(_a[1]))); break;
+        case 22: _t->setIsSelfAutoStarting((*reinterpret_cast< const bool(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 21:
+        case 20:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -315,13 +307,13 @@ int QtTypicalTool::Settings::qt_metacall(QMetaObject::Call _c, int _id, void **_
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 23;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 24)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 23;
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty

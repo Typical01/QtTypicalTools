@@ -83,36 +83,40 @@ int main(int argc, char* argv[])
     QMenu* trayMenu = new QMenu();
     SettingsInstance->Menu = trayMenu;
     trayMenu->setStyleSheet(R"(
-    QMenu {
-        background-color: #4e4e4e;
-        border-radius: 10px;
-        padding: 5px;
-        color: white;
-        /* 设置菜单最小宽度 */
-        min-width: 180px;  /* 调整菜单整体宽度 */
-        max-width: 300px;  /* 调整菜单整体宽度 */
-    }
-    QMenu::item {
-        padding: 5px 20px;
-        border-radius: 5px;
-    }
-    QMenu::item:selected {
-        background-color: #8f8f8f;
-    }
-    QMenu::separator {
-        height: 1px;
-        background: #555;
-        margin: 5px 0;
-    }
+QMenu {
+    background-color: white;
+    color: black;
+    font-family: "Microsoft YaHei";
+    border-radius: 10px;
+    padding: 5px;
+    min-width: 180px;
+    max-width: 300px;
+}
+
+QMenu::item {
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+
+QMenu::item:selected {
+    background-color: #e0e0e0;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: #ccc;
+    margin: 5px 0;
+}
 )");
     SettingsInstance->loadBaseConfig();
     SettingsInstance->loadShellConfig();
+
 
     SettingsInstance->loadToolsMenu();
     SettingsInstance->ExeRunItemShell();
 
 #ifdef _DEBUG
-    SettingsInstance->openSettingWindow("Debug");
+    SettingsInstance->openSettingWindow();
 #endif
 
     return app->exec();
